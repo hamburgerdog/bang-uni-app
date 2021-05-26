@@ -1,0 +1,57 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "帮帮互助"
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的帮帮",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/setting/setting",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#e3f6f5",
+		"backgroundColor": "#fffffe"
+	},
+	"tabBar": {
+		"color": "#272343",
+		"selectedColor": "#ffd803",
+		"borderStyle": "black",
+		"backgroundColor": "#e3f6f5",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "帮帮",
+				"iconPath": "static/icon/index.png",
+				"selectedIconPath": "static/icon/index.png"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"text": "我的",
+				"iconPath": "static/icon/home.png",
+				"selectedIconPath": "static/icon/home.png"
+			},
+			{
+				"pagePath": "pages/setting/setting",
+				"text": "设置",
+				"iconPath": "static/icon/setting.png",
+				"selectedIconPath": "static/icon/setting.png"
+			}
+		]
+	}
+}

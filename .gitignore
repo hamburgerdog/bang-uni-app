@@ -1,0 +1,6 @@
+*/**.DS_Store
+.hbuilderx
+unpackage/
+uni_modules/
+node_modules/
+**.lock
