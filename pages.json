@@ -3,14 +3,17 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "帮帮互助"
+				"navigationBarTitleText": "帮帮互助",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的帮帮",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 
 		},
@@ -18,7 +21,8 @@
 			"path": "pages/setting/setting",
 			"style": {
 				"navigationBarTitleText": "设置",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 
 		}
