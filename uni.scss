@@ -82,6 +82,16 @@ $element-button: #ffd803;
 $element-bg: #C5E0F7;
 $element-tertiary: #bae8e8;
 $element-blank-bg: #fff;
-$main-bg: #fffffe;
+$main-bg: #ffffff;
 $ill-stroke: #272343;
 $page-bg: #f9f9f9;
+$card-shadow:
+  0 0px 2.2px rgba(0, 0, 0, 0.003),
+  0 0px 5.3px rgba(0, 0, 0, 0.005),
+  0 0px 10px rgba(0, 0, 0, 0.006),
+  0 0px 17.9px rgba(0, 0, 0, 0.008),
+  0 0px 33.4px rgba(0, 0, 0, 0.011),
+  0 0px 80px rgba(0, 0, 0, 0.04)
+;
+
+$card-radius: 20rpx;

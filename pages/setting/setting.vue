@@ -62,16 +62,13 @@
 		},
 		methods: {
 			login() {
-				console.log("clicked")
 				uni.getUserProfile({
 					desc: '获取你的昵称、头像、地区及性别',
 					success: res => {
-						console.log(res);
 						this.user.imageSrc = res.userInfo.avatarUrl
 						this.user.nickName = res.userInfo.nickName
 					},
 					fail: res => {
-						console.log(res)
 						uni.showToast({
 							title: '您拒绝了请求:D',
 							icon: 'error',
