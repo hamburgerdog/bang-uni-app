@@ -4,16 +4,14 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "帮帮互助",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的帮帮",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"enablePullDownRefresh": false
 			}
 
 		},
@@ -21,8 +19,7 @@
 			"path": "pages/setting/setting",
 			"style": {
 				"navigationBarTitleText": "设置",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"enablePullDownRefresh": false
 			}
 
 		}
@@ -31,13 +28,14 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#e3f6f5",
-		"backgroundColor": "#fffffe"
+		"navigationStyle":"custom",
+		"backgroundColor": "#f9f9f9"
 	},
 	"tabBar": {
-		"color": "#272343",
-		"selectedColor": "#ffd803",
+		"color": "#666666",
+		"selectedColor": "#272343",
 		"borderStyle": "black",
-		"backgroundColor": "#e3f6f5",
+		"backgroundColor": "#C5E0F7",
 		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "帮帮",

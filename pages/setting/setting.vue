@@ -104,7 +104,6 @@
 		border-top-left-radius: 40rpx;
 		border-top-right-radius: 40rpx;
 		overflow-x: hidden;
-		background-color: #fafafa;
 	}
 
 	.user-box {
