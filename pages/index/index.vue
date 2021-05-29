@@ -4,19 +4,20 @@
 			<image src="../../static/title/title1.png" mode="aspectFill"></image>
 		</view>
 		<view class="main-box"></view>
-		<view class="main">
+		<view class="main" @click="goto">
 			<view class="grid-box">
-				<view v-for="bangButton in buttons" :key="bangButton.name">
+				<navigator v-for="bangButton in buttons" :key="bangButton.name" :url="bangButton.path"
+					open-type="navigate">
 					<bang-button :bangButton="bangButton"></bang-button>
-				</view>
+				</navigator>
 			</view>
 			<view class="main-card">
 				<image src="../../static/status/empty_data.png" mode="aspectFill" style="max-width: 100%;"></image>
 				<p>当前无订单</p>
 			</view>
 		</view>
-		<uni-fab :pattern="pattern" :content="content" horizontal="right" vertical="bottom" direction="vertical"
-			@trigger="trigger" />
+		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
+			direction="horizontal" @trigger="trigger" />
 	</view>
 </template>
 
@@ -35,45 +36,63 @@
 				content: [{
 						iconPath: '/static/icon/fab-icon/operation.png',
 						selectedIconPath: '/static/icon/fab-icon/operation-sel.png',
-						text: '发布求助',
+						text: '帮帮发布',
 						active: false
 					},
 					{
 						iconPath: '/static/icon/fab-icon/agriculture.png',
 						selectedIconPath: '/static/icon/fab-icon/agriculture-sel.png',
-						text: '外卖帮帮',
+						text: '发布外卖',
 						active: true
 					},
 					{
 						iconPath: '/static/icon/fab-icon/packaging.png',
 						selectedIconPath: '/static/icon/fab-icon/packaging-sel.png',
-						text: '快递帮帮',
+						text: '发布快递',
 						active: false
-					}
+					},
+					{
+						iconPath: '/static/icon/fab-icon/helper.png',
+						selectedIconPath: '/static/icon/fab-icon/helper-sel.png',
+						text: '发布互助',
+						active: false
+					},
+					{
+						iconPath: '/static/icon/fab-icon/aside.png',
+						selectedIconPath: '/static/icon/fab-icon/aside-sel.png',
+						text: '发布闲置',
+						active: false
+					},
 				],
 				buttons: [{
 						name: '帮帮',
-						icon: 'paperplane-filled'
+						icon: 'paperplane-filled',
+						path: '/pages/bangpage/BangWelfare'
 					},
 					{
 						name: '快递',
-						icon: 'flag-filled'
+						icon: 'flag-filled',
+						path: '/pages/bangpage/BangDeliver'
 					},
 					{
 						name: '外卖',
-						icon: 'cart-filled'
+						icon: 'cart-filled',
+						path: '/pages/bangpage/BangFood'
 					},
 					{
 						name: '互助',
-						icon: 'chatboxes-filled'
+						icon: 'chatboxes-filled',
+						path: '/pages/bangpage/BangHelper'
 					},
 					{
 						name: '闲置',
-						icon: 'chat-filled'
+						icon: 'chat-filled',
+						path: '/pages/bangpage/BangAside'
 					},
 					{
 						name: '赞助',
-						icon: 'heart-filled'
+						icon: 'heart-filled',
+						path: '/pages/index/index'
 					}
 				]
 			}
@@ -87,10 +106,16 @@
 					item.active = false;
 				})
 				this.content[e.index].active = true;
+			},
+			goto() {
+				console.log('goto_clicked')
 			}
 		},
 		components: {
 			BangButton,
+		},
+		onHide() {
+			this.$refs.fab.close()
 		}
 	}
 </script>
@@ -135,7 +160,7 @@
 		text-align: center;
 		border-radius: $card-radius;
 
-		>view {
+		>navigator {
 			background-color: $element-blank-bg;
 			border-radius: 30rpx;
 			padding: 20rpx;

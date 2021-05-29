@@ -22,13 +22,49 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/bangpage/BangDeliver",
+			"style": {
+				"navigationBarTitleText": "帮帮快递",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default"
+			}
+		}, {
+			"path": "pages/bangpage/BangFood",
+			"style": {
+				"navigationBarTitleText": "帮帮外卖",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default"
+			}
+		}, {
+			"path": "pages/bangpage/BangAside",
+			"style": {
+				"navigationBarTitleText": "帮帮闲置",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default"
+			}
+		}, {
+			"path": "pages/bangpage/BangWelfare",
+			"style": {
+				"navigationBarTitleText": "校园帮帮",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default"
+			}
+		}, {
+			"path": "pages/bangpage/BangHelper",
+			"style": {
+				"navigationBarTitleText": "帮帮互助",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default"
+			}
 		}
+
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#e3f6f5",
-		"navigationStyle":"custom",
+		"navigationBarBackgroundColor": "#C5E0F7",
+		"navigationStyle": "custom",
 		"backgroundColor": "#f9f9f9"
 	},
 	"tabBar": {
