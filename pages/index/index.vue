@@ -1,9 +1,15 @@
 <template>
 	<view>
 		<view class="title">
-			<image src="../../static/title/title1.png" mode="aspectFill"></image>
+			<image src="/static/title/title1.png" mode="aspectFill"></image>
 		</view>
-		<view class="main-box"></view>
+		<view class="main-box">
+			<swiper>
+				<swiper-item v-for="item in list" :key="item.index">
+					<image :src="item.src" mode="heightFix" style="max-height: inherit;"></image>
+				</swiper-item>
+			</swiper>
+		</view>
 		<view class="main" @click="goto">
 			<view class="grid-box">
 				<navigator v-for="bangButton in buttons" :key="bangButton.name" :url="bangButton.path"
@@ -12,7 +18,7 @@
 				</navigator>
 			</view>
 			<view class="main-card">
-				<image src="../../static/status/empty_data.png" mode="aspectFill" style="max-width: 100%;"></image>
+				<image src="/static/status/empty_data.png" mode="aspectFill" style="max-width: 100%;"></image>
 				<p>当前无订单</p>
 			</view>
 		</view>
@@ -67,32 +73,44 @@
 				buttons: [{
 						name: '帮帮',
 						icon: 'paperplane-filled',
-						path: '/pages/bangpage/BangWelfare'
+						path: '/pages/bangpages/BangWelfares'
 					},
 					{
 						name: '快递',
 						icon: 'flag-filled',
-						path: '/pages/bangpage/BangDeliver'
+						path: '/pages/bangpages/BangDelivers'
 					},
 					{
 						name: '外卖',
 						icon: 'cart-filled',
-						path: '/pages/bangpage/BangFood'
+						path: '/pages/bangpages/BangFoods'
 					},
 					{
 						name: '互助',
 						icon: 'chatboxes-filled',
-						path: '/pages/bangpage/BangHelper'
+						path: '/pages/bangpages/BangHelpers'
 					},
 					{
 						name: '闲置',
 						icon: 'chat-filled',
-						path: '/pages/bangpage/BangAside'
+						path: '/pages/bangpages/BangAsides'
 					},
 					{
 						name: '赞助',
 						icon: 'heart-filled',
-						path: '/pages/index/index'
+						path: '/pages/index/indexs'
+					}
+				],
+				list: [{
+						src: 'https://uni-demo.cool-js.com/static/images/banner2.png',
+						index: 0,
+					}, {
+						src: 'https://uni-demo.cool-js.com/static/images/banner1.png',
+						index: 1,
+					},
+					{
+						src: 'https://uni-demo.cool-js.com/static/images/banner3.png',
+						index: 2,
 					}
 				]
 			}
@@ -109,6 +127,11 @@
 			},
 			goto() {
 				console.log('goto_clicked')
+				uni.getUserInfo({
+					success(res){
+						console.log(res)
+					}
+				})
 			}
 		},
 		components: {
@@ -134,6 +157,7 @@
 
 	.main-box {
 		position: absolute;
+		overflow: hidden;
 		width: 92%;
 		height: 300rpx;
 		top: 280rpx;
@@ -142,6 +166,8 @@
 		border-radius: $card-radius;
 		box-shadow: $card-shadow;
 		background-image: linear-gradient(-45deg, $element-blank-bg, #fafafa);
+		-webkit-backface-visibility: hidden;
+		-webkit-transform: translate3d(0, 0, 0);
 	}
 
 	.main {

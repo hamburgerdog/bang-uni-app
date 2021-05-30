@@ -5,38 +5,36 @@
 		</view>
 		<view class="main-box">
 			<view class="main-grid">
-				<view class="card-deliver">
+				<navigator class="card-deliver" open-type="navigate" url="/pages/minepages/mydelivers">
 					<view class="deliver-text">
 						<p>我的快递</p>
 						<p>校园互助，点我帮帮</p>
 					</view>
 					<view>
-						<image style="max-height: 300rpx;" src="../../static/deliver.png" mode="aspectFit"></image>
+						<image style="max-height: 240rpx;" src="../../static/deliver.png" mode="aspectFit"></image>
 					</view>
-				</view>
-				<view class="card-aside">
+				</navigator>
+				<navigator class="card-aside" open-type="navigate" url="/pages/minepages/myasides">
 					<view class="aside-text">
-						<uni-icons type="chat" color="#272343" size="30"></uni-icons>
+						<uni-icons type="chat" color="#272343" size="50"></uni-icons><br>
 						<span>我的闲置</span>
 					</view>
 					<view>
 						<p>查看闲置物品</p>
 					</view>
-				</view>
-				<view class="card-food">
-					<image style="max-width: 236rpx;" src="../../static/food.png" mode="aspectFill"></image>
-					<p>
-						<uni-icons type="cart-filled" color="#272343" size="26" />我的外卖
-					</p>
-				</view>
-				<view class="card-welfare">
-					<uni-icons type="paperplane-filled" size="50" color="#272343"></uni-icons>
+				</navigator>
+				<navigator class="card-food" open-type="navigate" url="/pages/minepages/myfoods">
+					<image style="max-height: 400rpx;" src="../../static/food.png" mode="heightFix"></image>
+					<p>我的外卖</p>
+				</navigator>
+				<navigator class="card-welfare" open-type="navigate" url="/pages/minepages/mywelfares">
+					<uni-icons type="paperplane-filled" size="40" color="#272343"></uni-icons>
 					<p>我的帮帮</p>
-				</view>
-				<view class="card-helper">
-					<uni-icons class="helper-icon" type="chatboxes" size="50" color="#272343"></uni-icons>
+				</navigator>
+				<navigator class="card-helper" open-type="navigate" url="/pages/minepages/myhelpers">
+					<uni-icons class="helper-icon" type="chatboxes" size="40" color="#272343"></uni-icons>
 					<p>我的互助</p>
-				</view>
+				</navigator>
 			</view>
 		</view>
 	</view>
@@ -66,6 +64,7 @@
 
 	.main-box {
 		position: relative;
+		height: calc(100vh - 360rpx);
 		background-color: $element-blank-bg;
 		padding: 14rpx;
 		border-top-left-radius: 40rpx;
@@ -74,12 +73,13 @@
 
 	.main-grid {
 		margin-top: 30rpx;
+		padding: 40rpx;
 		display: grid;
 		grid-template-areas:
 			'deliver deliver deliver'
 			'aside aside food'
 			'welfare helper food';
-		grid-gap: 24rpx;
+		grid-gap: 30rpx;
 
 	}
 
@@ -95,7 +95,7 @@
 		padding: 20rpx;
 
 		:last-child {
-			width: 340rpx;
+			width: 300rpx;
 
 			image {
 				width: inherit;
@@ -105,7 +105,7 @@
 
 	.deliver-text {
 		color: $element-headline;
-		padding-top: 60rpx;
+		padding-top: 30rpx;
 		text-align: center;
 
 		:first-child {
@@ -131,7 +131,6 @@
 	.aside-text {
 		font-size: 52rpx;
 		font-weight: 500;
-		margin-top: 40rpx;
 
 		span {
 			margin-left: 20rpx;

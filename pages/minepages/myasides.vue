@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<RouterFab></RouterFab>
-		<uni-search-bar :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+		<PageTitle :title='title'></PageTitle>
 	</view>
 </template>
 
@@ -9,7 +8,7 @@
 	export default {
 		data() {
 			return {
-
+				title:'闲置物品'
 			}
 		},
 		methods: {

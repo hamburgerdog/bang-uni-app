@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "cl-uni": "^1.8.11",
     "uni-read-pages": "^1.0.5",
     "uni-simple-router": "^2.0.5"
   }

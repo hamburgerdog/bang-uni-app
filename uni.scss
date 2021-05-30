@@ -75,10 +75,22 @@ $uni-font-size-subtitle:36rpx;
 $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30rpx;
 
+@import "cl-uni/theme.scss";
+
+/* cool-uni默认主题色 */
+$cl-color-primary: #409eff;
+$cl-color-default: #dcdfe6;
+$cl-color-success: #67c23a;
+$cl-color-warning: #e6a23c;
+$cl-color-error: #dd524d;
+$cl-color-info: #909399;
+$cl-color-disabled: #c0c4cc;
+
 // 自定义
 $element-button-text: #C5E0F7;
 $element-headline: #272343;
 $element-button: #ffd803;
+$element-highlight: #ffd803;
 $element-bg: #C5E0F7;
 $element-tertiary: #bae8e8;
 $element-blank-bg: #fff;

@@ -120,7 +120,6 @@
 
 	.user-info {
 		margin-left: 42rpx;
-		color: $element-headline;
 		line-height: 1.8;
 		font-size: 18px;
 		font-weight: 500;
@@ -130,6 +129,7 @@
 	.setting-box {
 		display: flex;
 		flex-direction: column;
+		color: $element-headline;
 
 		>view {
 			overflow: hidden;

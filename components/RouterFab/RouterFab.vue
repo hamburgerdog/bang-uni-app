@@ -20,35 +20,35 @@
 						selectedIconPath: '/static/icon/fab-icon/operation-sel.png',
 						text: '校园帮帮',
 						active: false,
-						path: '/pages/bangpage/BangWelfare'
+						path: '/pages/bangpages/BangWelfares'
 					},
 					{
 						iconPath: '/static/icon/fab-icon/agriculture.png',
 						selectedIconPath: '/static/icon/fab-icon/agriculture-sel.png',
 						text: '帮帮快递',
 						active: false,
-						path: '/pages/bangpage/BangDeliver'
+						path: '/pages/bangpages/BangDelivers'
 					},
 					{
 						iconPath: '/static/icon/fab-icon/packaging.png',
 						selectedIconPath: '/static/icon/fab-icon/packaging-sel.png',
 						text: '帮帮外卖',
 						active: false,
-						path: '/pages/bangpage/BangFood'
+						path: '/pages/bangpages/BangFoods'
 					},
 					{
 						iconPath: '/static/icon/fab-icon/helper.png',
 						selectedIconPath: '/static/icon/fab-icon/helper-sel.png',
 						text: '帮帮互助',
 						active: false,
-						path: '/pages/bangpage/BangHelper'
+						path: '/pages/bangpages/BangHelpers'
 					},
 					{
 						iconPath: '/static/icon/fab-icon/aside.png',
 						selectedIconPath: '/static/icon/fab-icon/aside-sel.png',
 						text: '帮帮闲置',
 						active: false,
-						path: '/pages/bangpage/BangAside'
+						path: '/pages/bangpages/BangAsides'
 					}
 				],
 			}

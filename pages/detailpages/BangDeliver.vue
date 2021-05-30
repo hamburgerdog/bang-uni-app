@@ -1,6 +1,6 @@
 <template>
 	<view>
-
+		
 	</view>
 </template>
 
@@ -8,17 +8,12 @@
 	export default {
 		data() {
 			return {
-
-			}
-		},
-		methods: {
-
-		},
-		components: {
-
+				
+			};
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
 </style>

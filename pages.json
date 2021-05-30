@@ -4,14 +4,16 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "帮帮互助",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的帮帮",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 
 		},
@@ -19,52 +21,124 @@
 			"path": "pages/setting/setting",
 			"style": {
 				"navigationBarTitleText": "设置",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 
 		}, {
-			"path": "pages/bangpage/BangDeliver",
+			"path": "pages/bangpages/BangDelivers",
 			"style": {
 				"navigationBarTitleText": "帮帮快递",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "default"
+				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/bangpage/BangFood",
+			"path": "pages/bangpages/BangFoods",
 			"style": {
 				"navigationBarTitleText": "帮帮外卖",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "default"
+				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/bangpage/BangAside",
+			"path": "pages/bangpages/BangAsides",
 			"style": {
 				"navigationBarTitleText": "帮帮闲置",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "default"
+				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/bangpage/BangWelfare",
+			"path": "pages/bangpages/BangWelfares",
 			"style": {
 				"navigationBarTitleText": "校园帮帮",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "default"
+				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/bangpage/BangHelper",
+			"path": "pages/bangpages/BangHelpers",
 			"style": {
 				"navigationBarTitleText": "帮帮互助",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "default"
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/minepages/mydelivers",
+			"style": {
+				"navigationBarTitleText": "我的快递",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/minepages/myfoods",
+			"style": {
+				"navigationBarTitleText": "我的外卖",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/minepages/myasides",
+			"style": {
+				"navigationBarTitleText": "我的闲置",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/minepages/mywelfares",
+			"style": {
+				"navigationBarTitleText": "我的帮帮",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/minepages/myhelpers",
+			"style": {
+				"navigationBarTitleText": "我的互助",
+				"enablePullDownRefresh": false
 			}
 		}
 
-	],
+	    ,{
+            "path" : "pages/detailpages/BangAside",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "帮帮闲置",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/detailpages/BangDeliver",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "帮帮快递",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/detailpages/BangFood",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "帮帮外卖",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/detailpages/BangHelper",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "帮帮互助",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/detailpages/BangWelfare",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "校园帮帮",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#C5E0F7",
-		"navigationStyle": "custom",
+		"navigationStyle": "default",
 		"backgroundColor": "#f9f9f9"
 	},
 	"tabBar": {
@@ -91,5 +165,12 @@
 				"selectedIconPath": "static/icon/setting.png"
 			}
 		]
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			// 1.1.0 版本后:
+			"cl-(.*)": "cl-uni/components/cl-$1/cl-$1.vue"
+		}
 	}
 }
