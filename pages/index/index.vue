@@ -10,7 +10,7 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		<view class="main" @click="goto">
+		<view class="main">
 			<view class="grid-box">
 				<navigator v-for="bangButton in buttons" :key="bangButton.name" :url="bangButton.path"
 					open-type="navigate">
@@ -23,7 +23,7 @@
 			</view>
 		</view>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
-			direction="horizontal" @trigger="trigger" />
+			direction="horizontal" @trigger="release" />
 	</view>
 </template>
 
@@ -42,30 +42,35 @@
 				content: [{
 						iconPath: '/static/icon/fab-icon/operation.png',
 						selectedIconPath: '/static/icon/fab-icon/operation-sel.png',
+						path: "pages/releasepages/ReleaseWelfare",
 						text: '帮帮发布',
 						active: false
 					},
 					{
 						iconPath: '/static/icon/fab-icon/agriculture.png',
 						selectedIconPath: '/static/icon/fab-icon/agriculture-sel.png',
+						path: "pages/releasepages/ReleaseFood",
 						text: '发布外卖',
-						active: true
+						active: false
 					},
 					{
 						iconPath: '/static/icon/fab-icon/packaging.png',
 						selectedIconPath: '/static/icon/fab-icon/packaging-sel.png',
+						path: "pages/releasepages/ReleaseDeliver",
 						text: '发布快递',
 						active: false
 					},
 					{
 						iconPath: '/static/icon/fab-icon/helper.png',
 						selectedIconPath: '/static/icon/fab-icon/helper-sel.png',
+						path: "pages/releasepages/ReleaseHelper",
 						text: '发布互助',
 						active: false
 					},
 					{
 						iconPath: '/static/icon/fab-icon/aside.png',
 						selectedIconPath: '/static/icon/fab-icon/aside-sel.png',
+						path: "pages/releasepages/ReleaseAside",
 						text: '发布闲置',
 						active: false
 					},
@@ -119,18 +124,13 @@
 
 		},
 		methods: {
-			trigger(e) {
+			release(e) {
 				this.content.forEach(function(item) {
 					item.active = false;
 				})
 				this.content[e.index].active = true;
-			},
-			goto() {
-				console.log('goto_clicked')
-				uni.getUserInfo({
-					success(res){
-						console.log(res)
-					}
+				uni.navigateTo({
+					url: this.content[e.index].path
 				})
 			}
 		},

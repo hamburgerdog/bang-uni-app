@@ -137,7 +137,43 @@
             "path" : "pages/releasepages/ReleaseWelfare",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "发布帮帮",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/releasepages/ReleaseDeliver",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布快递",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/releasepages/ReleaseAside",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布闲置",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/releasepages/ReleaseHelper",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布互助",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/releasepages/ReleaseFodd",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布外卖",
                 "enablePullDownRefresh": false
             }
             
