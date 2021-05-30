@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="title">
+		<!-- <view class="title">
 			<image src="../../static/title/title2.png" mode="aspectFill"></image>
-		</view>
+		</view> -->
 		<view class="main-box">
 			<view class="main-grid">
 				<navigator class="card-deliver" open-type="navigate" url="/pages/minepages/mydelivers">
@@ -51,19 +51,20 @@
 </script>
 
 <style lang="scss" scoped>
-	.title {
-		background-color: $element-bg;
-		height: 400rpx;
-		margin-bottom: -40rpx;
-		overflow: hidden;
+	// .title {
+	// 	background-color: $element-bg;
+	// 	height: 400rpx;
+	// 	margin-bottom: -40rpx;
+	// 	overflow: hidden;
 
-		image {
-			min-width: 100%;
-		}
-	}
+	// 	image {
+	// 		min-width: 100%;
+	// 	}
+	// }
 
 	.main-box {
 		position: relative;
+		top: 400rpx;
 		height: calc(100vh - 360rpx);
 		background-color: $element-blank-bg;
 		padding: 14rpx;

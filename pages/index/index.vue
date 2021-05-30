@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="title">
+		<!-- <view class="title">
 			<image src="/static/title/title1.png" mode="aspectFill"></image>
-		</view>
+		</view> -->
 		<view class="main-box">
 			<swiper>
 				<swiper-item v-for="item in list" :key="item.index">
@@ -34,10 +34,10 @@
 		data() {
 			return {
 				pattern: {
-					color: '#272343',
+					color: '#00274f',
 					backgroundColor: '#FFFFFF',
 					selectedColor: '#007AFF',
-					buttonColor: '#272343'
+					buttonColor: '#c6e0f9'
 				},
 				content: [{
 						iconPath: '/static/icon/fab-icon/operation.png',
@@ -144,16 +144,16 @@
 </script>
 
 <style lang="scss">
-	.title {
-		background-color: $element-bg;
-		height: 400rpx;
-		overflow: hidden;
-		margin-bottom: -40rpx;
+	// .title {
+	// 	background-color: $element-bg;
+	// 	height: 400rpx;
+	// 	overflow: hidden;
+	// 	margin-bottom: -40rpx;
 
-		image {
-			min-width: 100%;
-		}
-	}
+	// 	image {
+	// 		min-width: 100%;
+	// 	}
+	// }
 
 	.main-box {
 		position: absolute;
@@ -171,7 +171,7 @@
 	}
 
 	.main {
-		margin-top: 200rpx;
+		margin-top: 600rpx;
 		padding: 4%;
 	}
 

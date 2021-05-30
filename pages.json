@@ -133,36 +133,45 @@
             }
             
         }
+        ,{
+            "path" : "pages/releasepages/ReleaseWelfare",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#C5E0F7",
+		"navigationBarBackgroundColor": "#c6e0f9",
 		"navigationStyle": "default",
-		"backgroundColor": "#f9f9f9"
+		"backgroundColor": "#c6e0f9"
 	},
 	"tabBar": {
-		"color": "#666666",
-		"selectedColor": "#272343",
-		"borderStyle": "black",
-		"backgroundColor": "#C5E0F7",
+		"color": "#999999",
+		"selectedColor": "#00274f",
+		"borderStyle": "white",
+		"backgroundColor": "#c6e0f9",
 		"list": [{
 				"pagePath": "pages/index/index",
-				"text": "帮帮",
+				"text": "首页",
 				"iconPath": "static/icon/index.png",
-				"selectedIconPath": "static/icon/index.png"
+				"selectedIconPath": "static/icon/index-sel.png"
 			},
 			{
 				"pagePath": "pages/mine/mine",
-				"text": "我的",
+				"text": "订单",
 				"iconPath": "static/icon/home.png",
-				"selectedIconPath": "static/icon/home.png"
+				"selectedIconPath": "static/icon/home-sel.png"
 			},
 			{
 				"pagePath": "pages/setting/setting",
-				"text": "设置",
+				"text": "我的",
 				"iconPath": "static/icon/setting.png",
-				"selectedIconPath": "static/icon/setting.png"
+				"selectedIconPath": "static/icon/setting-sel.png"
 			}
 		]
 	},

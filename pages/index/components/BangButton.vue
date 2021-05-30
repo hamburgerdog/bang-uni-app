@@ -1,6 +1,6 @@
 <template>
 	<view class="box">
-		<uni-icons :type="bangButton.icon" color="#272343" size="30"></uni-icons>
+		<uni-icons :type="bangButton.icon" color="#46A3ff" size="30"></uni-icons>
 		<p>{{bangButton.name}}</p>
 	</view>
 </template>

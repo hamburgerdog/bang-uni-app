@@ -12,44 +12,14 @@
 				</view>
 			</view>
 			<view class="setting-box">
-				<!-- 个人信息 -->
-				<view>
-					<view>
-						<uni-icons type="contact" color="#272343" size="24"></uni-icons>
-						<p>个人信息</p>
-					</view>
-					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
-				</view>
-				<!-- 收藏闲置 -->
-				<view>
-					<view>
-						<uni-icons type="heart-filled" color="#272343" size="24"></uni-icons>
-						<p>收藏闲置</p>
-					</view>
-					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
-				</view>
-				<!-- 意见反馈 -->
-				<view>
-					<view>
-						<uni-icons type="info-filled" color="#272343" size="24"></uni-icons>
-						<p>意见反馈</p>
-					</view>
-					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
-				</view>
-				<!-- 联系客服 -->
-				<view>
-					<view>
-						<uni-icons type="chat-filled" color="#272343" size="24"></uni-icons>
-						<p>联系客服</p>
-					</view>
-					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
-				</view>
+				<setting-item v-for="settingItem in settings" :key="settingItem.index" :item="settingItem"></setting-item>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import SettingItem from './components/SettingItem.vue'
 	export default {
 		data() {
 			return {
@@ -57,8 +27,31 @@
 					imageSrc: "../../static/dog.jpg",
 					nickName: "登录/注册",
 					email: "123@qq.com"
-				}
+				},
+				settings:[{
+					index:0,
+					name:'个人信息',
+					icon:'contact'
+				},
+				{
+					index:1,
+					name:'闲置收藏',
+					icon:'heart-filled'
+				},
+				{
+					index:2,
+					name:'意见反馈',
+					icon:'info-filled'
+				},
+				{
+					index:3,
+					name:'联系客服',
+					icon:'chat-filled'
+				}]
 			};
+		},
+		components:{
+			SettingItem,
 		},
 		methods: {
 			login() {
@@ -89,27 +82,31 @@
 		box-sizing: border-box;
 		margin-bottom: -40rpx;
 		overflow: hidden;
-		
-		image{
+
+		image {
 			min-width: 100%;
 		}
 	}
 
 	.user-page {
 		position: relative;
+		padding: 40rpx;
 		height: calc(100vh - 360rpx);
 		border-top-left-radius: 40rpx;
 		border-top-right-radius: 40rpx;
-		overflow-x: hidden;
 	}
 
 	.user-box {
 		display: flex;
+		position: relative;
+		top: -120rpx;
+		border-radius: 40rpx;
 		flex-direction: row;
 		align-items: center;
 		padding: 30rpx;
 		background-color: #fff;
 		border-bottom: 4rpx solid #fafafa;
+		margin-bottom: -120rpx;
 	}
 
 	.user-image {
@@ -130,31 +127,5 @@
 		display: flex;
 		flex-direction: column;
 		color: $element-headline;
-
-		>view {
-			overflow: hidden;
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-			height: 100rpx;
-			padding: 0 36rpx;
-			background-color: #fff;
-			border-top-left-radius: 40rpx;
-			border-bottom-left-radius: 40rpx;
-			box-shadow:
-				0 3px 5.3px rgba(0, 0, 0, 0.008),
-				0 10.1px 17.9px rgba(0, 0, 0, 0.01),
-				0 45px 80px rgba(0, 0, 0, 0.04);
-			margin-top: 30rpx;
-
-			>view {
-				width: 30%;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-			}
-		}
 	}
 </style>
