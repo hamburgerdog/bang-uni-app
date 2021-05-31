@@ -22,6 +22,20 @@
 					<cl-radio label="其他">其他</cl-radio>
 				</cl-radio-group>
 			</cl-form-item>
+			<cl-form-item prop="contactInfo" label="联系方式">
+				<view class="contact-category">
+					<cl-select v-model="form.contactCategory" :options="contactCategoryList" placeholder="联系方式"
+						@change="select">
+					</cl-select>
+				</view>
+				<view class=" contact-info">
+					<cl-input v-model="form.contactInfo"></cl-input>
+				</view>
+				<view>
+					<cl-select v-model="form.email" :options="emailList" placeholder="请选择" v-show="isEmail">
+					</cl-select>
+				</view>
+			</cl-form-item>
 			<cl-form-item prop="deadline" label="截止日期">
 				<uni-datetime-picker v-model="form.deadline"></uni-datetime-picker>
 			</cl-form-item>
@@ -108,6 +122,40 @@
 						value: 3
 					}
 				],
+				contactCategoryList: [{
+						label: '微信',
+						value: 'wx'
+					},
+					{
+						label: '手机号码',
+						value: 'tel'
+					},
+					{
+						label: 'QQ',
+						value: 'qq'
+					},
+					{
+						label: '邮箱',
+						value: 'email'
+					}
+				],
+				emailList: [{
+						label: '@qq.com',
+						value: '@qq.com'
+					},
+					{
+						label: '@163.com',
+						value: '@163.com'
+					},
+					{
+						label: '@sohu.com',
+						value: '@sohu.com'
+					},
+					{
+						label: '@sina.com',
+						value: '@sina.com'
+					}
+				],
 				rules: {
 					destCategory: {
 						required: true,
@@ -122,6 +170,10 @@
 					pickUpAddress: {
 						required: true,
 						message: '请选择一个目的地'
+					},
+					contactInfo: {
+						required: true,
+						message: '请输入您的联系方式'
 					},
 					deadline: {
 						required: true,
@@ -144,11 +196,16 @@
 					destCategory: '',
 					destination: '',
 					pickUpAddress: '',
+					category: '',
+					contactCategory: '',
+					contactInfo: '',
+					email: '',
 					deadline: '',
 					commission: '',
 					briefInfo: '',
 					packageNumbers: ''
-				}
+				},
+				isEmail: false,
 			}
 		},
 		methods: {
@@ -158,6 +215,9 @@
 						console.log("success");
 					}
 				});
+			},
+			select(value) {
+				if (value === 'email') this.isEmail = true
 			}
 		}
 	}

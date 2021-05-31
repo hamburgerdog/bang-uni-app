@@ -21,4 +21,9 @@
 		box-shadow: $card-shadow;
 		padding: 20rpx;
 	}
+	
+	.contact-category,
+	.contact-info {
+		margin-right: 10rpx;
+	}
 </style>

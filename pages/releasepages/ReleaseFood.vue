@@ -24,6 +24,20 @@
 			<cl-form-item prop="commission" label="酬金">
 				<cl-select v-model="form.commission" :options="commissionList" border="true"></cl-select>
 			</cl-form-item>
+			<cl-form-item prop="contactInfo" label="联系方式">
+				<view class="contact-category">
+					<cl-select v-model="form.contactCategory" :options="contactCategoryList" placeholder="联系方式"
+						@change="select">
+					</cl-select>
+				</view>
+				<view class=" contact-info">
+					<cl-input v-model="form.contactInfo"></cl-input>
+				</view>
+				<view>
+					<cl-select v-model="form.email" :options="emailList" placeholder="请选择" v-show="isEmail">
+					</cl-select>
+				</view>
+			</cl-form-item>
 			<cl-form-item prop="deadline" label="截止时间">
 				<uni-datetime-picker v-model="form.deadline"></uni-datetime-picker>
 			</cl-form-item>
@@ -102,6 +116,40 @@
 						value: 5
 					}
 				],
+				contactCategoryList: [{
+						label: '微信',
+						value: 'wx'
+					},
+					{
+						label: '手机号码',
+						value: 'tel'
+					},
+					{
+						label: 'QQ',
+						value: 'qq'
+					},
+					{
+						label: '邮箱',
+						value: 'email'
+					}
+				],
+				emailList: [{
+						label: '@qq.com',
+						value: '@qq.com'
+					},
+					{
+						label: '@163.com',
+						value: '@163.com'
+					},
+					{
+						label: '@sohu.com',
+						value: '@sohu.com'
+					},
+					{
+						label: '@sina.com',
+						value: '@sina.com'
+					}
+				],
 				form: {
 					pickUpAddress: '',
 					destCategory: '',
@@ -109,6 +157,9 @@
 					deadline: null,
 					commission: 2,
 					briefInfo: '',
+					contactCategory: '',
+					contactInfo: '',
+					email: '',
 					pickUpName: '',
 					pickUpNumber: '',
 					foodDeliverPhone: '',
@@ -116,52 +167,56 @@
 					remarks: ''
 				},
 				rules: {
-					pickUpAddress:{
-						required:true,
-						message:'请选择最靠近取餐地点的区域'
+					pickUpAddress: {
+						required: true,
+						message: '请选择最靠近取餐地点的区域'
 					},
-					destCategory:{
-						required:true,
-						message:'请选择送餐地点的区域'
+					destCategory: {
+						required: true,
+						message: '请选择送餐地点的区域'
 					},
-					destination:{
-						required:true,
-						message:'请简要写明送餐地点'
+					destination: {
+						required: true,
+						message: '请简要写明送餐地点'
 					},
-					deadline:{
-						required:true,
-						message:'请选择外卖截止时间'
+					deadline: {
+						required: true,
+						message: '请选择外卖截止时间'
 					},
-					commission:{
-						required:true,
-						message:'请您选择订单的酬金'
+					commission: {
+						required: true,
+						message: '请您选择订单的酬金'
 					},
-					briefInfo:{
-						required:true,
-						message:'请简要描述送餐需求'
+					briefInfo: {
+						required: true,
+						message: '请简要描述送餐需求'
 					},
-					pickUpName:{
-						required:true,
-						message:'请输入您的取餐昵称'
+					contactInfo: {
+						required: true,
+						message: '请输入您的联系方式'
 					},
-					pickUpNumber:{
-						required:true,
-						message:'请输入您的取餐码'
+					pickUpName: {
+						required: true,
+						message: '请输入您的取餐昵称'
 					},
-					foodDeliverPhone:{
-						required:false,
-						message:'请输入外卖员联系方式'
+					pickUpNumber: {
+						required: true,
+						message: '请输入您的取餐码'
 					},
-					images:{
-						required:false,
-						message:'请选择上传订单详情图片'
+					foodDeliverPhone: {
+						required: false,
+						message: '请输入外卖员联系方式'
 					},
-					remarks:{
-						required:false,
-						message:'请填入您对送单的要求'
+					images: {
+						required: false,
+						message: '请选择上传订单详情图片'
 					},
-					
-				}
+					remarks: {
+						required: false,
+						message: '请填入您对送单的要求'
+					},
+				},
+				isEmail: false,
 			};
 		},
 		methods: {
@@ -171,6 +226,9 @@
 						console.log("success");
 					}
 				});
+			},
+			select(value) {
+				if (value === 'email') this.isEmail = true
 			}
 		}
 	}

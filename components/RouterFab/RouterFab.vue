@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view @longpress="reflash()">
 		<uni-fab :pattern="pattern" :content="content" horizontal="right" vertical="bottom" direction="vertical"
 			@trigger="trigger" />
 	</view>
@@ -63,7 +63,19 @@
 					url: this.content[e.index].path
 				})
 			},
+			reflash() {
+				uni.pageScrollTo({
+					scrollTop: 0
+				})
+				uni.showToast({
+				    title: '刷新成功',
+					icon:'success',
+				    duration: 2000
+				});
+				this.$emit('reflash')
+			},
 		},
+		onLoad() {},
 		components: {
 
 		},
