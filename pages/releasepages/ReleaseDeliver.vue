@@ -1,6 +1,6 @@
 <template>
 	<view class="form-box">
-		<cl-form ref="form" :model.sync="form" :rules="rules" label-width="240rpx" label-position="top" border="true">
+		<cl-form ref="form" :model.sync="form" :rules="rules" label-width="400rpx" label-position="top" border="true">
 			<cl-form-item prop="destCategory" label="目的地区域">
 				<cl-radio-group border="true" v-model="form.destCategory">
 					<cl-radio label="梅苑">梅苑</cl-radio>
@@ -25,9 +25,19 @@
 			<cl-form-item prop="deadline" label="截止日期">
 				<uni-datetime-picker v-model="form.deadline"></uni-datetime-picker>
 			</cl-form-item>
+			<cl-form-item prop="commission" label="酬金">
+				<cl-select v-model="form.commission" :options="commissionList" border="true"></cl-select>
+			</cl-form-item>
+			<!-- briefInfo -->
+			<cl-form-item prop="briefInfo" label="快递信息简要描述">
+				<cl-select v-model="form.briefInfo" :options="briefInfoList" border="true"></cl-select>
+			</cl-form-item>
+			<!-- packageNumbers -->
+			<cl-form-item prop="packageNumbers" label="快递件数">
+				<cl-select v-model="form.packageNumbers" :options="packageNumbersList" border="true"></cl-select>
+			</cl-form-item>
 		</cl-form>
-
-		<cl-button type="success" @tap="onSubmit">提交</cl-button>
+		<cl-button type="success" @tap="onSubmit" fill="true">提交</cl-button>
 	</view>
 </template>
 
@@ -35,23 +45,99 @@
 	export default {
 		data() {
 			return {
+				commissionList: [{
+						label: "1元",
+						value: 1
+					},
+					{
+						label: "2元",
+						value: 2
+					},
+					{
+						label: "3元",
+						value: 3
+					},
+					{
+						label: "4元",
+						value: 4
+					},
+					{
+						label: "5元",
+						value: 5
+					},
+					{
+						label: "面谈",
+						value: 0
+					}
+				],
+				briefInfoList: [{
+						label: "小件",
+						value: 1
+					},
+					{
+						label: "大件",
+						value: 2
+					},
+					{
+						label: "易碎",
+						value: 3
+					},
+					{
+						label: "较轻",
+						value: 4
+					},
+					{
+						label: "较重",
+						value: 5
+					},
+					{
+						label: "重物",
+						value: 6
+					}
+				],
+				packageNumbersList: [{
+						label: "1件",
+						value: 1
+					},
+					{
+						label: "2件",
+						value: 2
+					},
+					{
+						label: "3件及以上",
+						value: 3
+					}
+				],
 				rules: {
 					destCategory: {
 						required: true,
-						errorMessage: '请选择一个区域'
+						message: '请选择一个区域'
 					},
 					destination: {
 						required: true,
 						maxLength: 30,
 						format: 'string',
-						errorMessage: '请勿超过30个字符'
+						message: '请勿超过30个字符'
 					},
 					pickUpAddress: {
 						required: true,
-						errorMessage: '请选择一个目的地'
+						message: '请选择一个目的地'
 					},
-					deadline:{
-						required:true,
+					deadline: {
+						required: true,
+						message: '请选择截止日期'
+					},
+					commission: {
+						required: true,
+						message: '请选择一个酬金金额'
+					},
+					briefInfo: {
+						required: true,
+						message: '请选择快递的简要描述'
+					},
+					packageNumbers: {
+						required: true,
+						message: '请选择快递件数'
 					}
 				},
 				form: {
@@ -78,11 +164,4 @@
 </script>
 
 <style lang="scss" scoped>
-	.form-box {
-		background-color: $main-bg;
-		border-bottom-left-radius: $card-radius;
-		border-bottom-right-radius: $card-radius;
-		box-shadow: $card-shadow;
-		padding: 20rpx;
-	}
 </style>

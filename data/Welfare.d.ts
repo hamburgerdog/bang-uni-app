@@ -1,5 +1,5 @@
 // 请求返回时不能直接使用Welfare而是在ResponseEntity封装后的数据中获取
-class Welfare {
+declare class Welfare {
   public uuid: string     //  null
   public title: string
   public content: string
@@ -20,7 +20,7 @@ class Welfare {
 }
 
 
-class WelfareAPI {
+declare class WelfareAPI {
   /**
    * 创建公益订单
    * @param welfare 数据对象不包含uuid

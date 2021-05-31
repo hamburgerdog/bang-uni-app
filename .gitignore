@@ -4,3 +4,4 @@ unpackage/
 uni_modules/
 node_modules/
 **.lock
+.DS_Store

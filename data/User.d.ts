@@ -1,4 +1,4 @@
-class User {
+declare class User {
   public openId: string
   public nickName: string
   public userName: string // null
@@ -7,7 +7,7 @@ class User {
   // public balance : number 
 }
 
-class UserApi {
+declare class UserApi {
   /**
    * getUserprofile()后 向服务器注册|登录的接口
    * @param nickName 用户昵称

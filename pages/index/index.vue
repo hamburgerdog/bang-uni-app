@@ -14,8 +14,11 @@
 			<view class="grid-box">
 				<navigator v-for="bangButton in buttons" :key="bangButton.name" :url="bangButton.path"
 					open-type="navigate">
-					<bang-button :bangButton="bangButton"></bang-button>
+					<bang-button class="bang-button" :bangButton="bangButton"></bang-button>
 				</navigator>
+				<view class="release-button" @click="popup()">
+					<bang-button :bangButton="releaseButton"></bang-button>
+				</view>
 			</view>
 			<view class="main-card">
 				<image src="/static/status/empty_data.png" mode="aspectFill" style="max-width: 100%;"></image>
@@ -24,6 +27,7 @@
 		</view>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
 			direction="horizontal" @trigger="release" />
+		<cl-popup :visible.sync="visible" :size="600" direction="bottom"></cl-popup>
 	</view>
 </template>
 
@@ -77,35 +81,46 @@
 				],
 				buttons: [{
 						name: '帮帮',
-						icon: 'paperplane-filled',
+						icon: 'heart-filled',
+						color: '#46A3ff',
+						textcolor: '#00274f',
 						path: '/pages/bangpages/BangWelfares'
 					},
 					{
 						name: '快递',
 						icon: 'flag-filled',
+						color: '#46A3ff',
+						textcolor: '#00274f',
 						path: '/pages/bangpages/BangDelivers'
 					},
 					{
 						name: '外卖',
 						icon: 'cart-filled',
+						color: '#46A3ff',
+						textcolor: '#00274f',
 						path: '/pages/bangpages/BangFoods'
 					},
 					{
 						name: '互助',
 						icon: 'chatboxes-filled',
+						color: '#46A3ff',
+						textcolor: '#00274f',
 						path: '/pages/bangpages/BangHelpers'
 					},
 					{
 						name: '闲置',
 						icon: 'chat-filled',
+						color: '#46A3ff',
+						textcolor: '#00274f',
 						path: '/pages/bangpages/BangAsides'
 					},
-					{
-						name: '赞助',
-						icon: 'heart-filled',
-						path: '/pages/index/indexs'
-					}
 				],
+				releaseButton: {
+					name: '发布',
+					icon: 'paperplane-filled',
+					color: '#fff',
+					textcolor: '#fff'
+				},
 				list: [{
 						src: 'https://uni-demo.cool-js.com/static/images/banner2.png',
 						index: 0,
@@ -117,11 +132,9 @@
 						src: 'https://uni-demo.cool-js.com/static/images/banner3.png',
 						index: 2,
 					}
-				]
+				],
+				visible: false
 			}
-		},
-		onLoad() {
-
 		},
 		methods: {
 			release(e) {
@@ -132,14 +145,19 @@
 				uni.navigateTo({
 					url: this.content[e.index].path
 				})
+			},
+			popup() {
+				console.log('click')
+				this.visible = true
 			}
 		},
 		components: {
 			BangButton,
 		},
 		onHide() {
-			this.$refs.fab.close()
-		}
+			this.$refs.fab.close();
+		},
+		onLoad() {},
 	}
 </script>
 
@@ -186,11 +204,16 @@
 		text-align: center;
 		border-radius: $card-radius;
 
-		>navigator {
+		>navigator,
+		.release-button {
 			background-color: $element-blank-bg;
 			border-radius: 30rpx;
 			padding: 20rpx;
 			box-shadow: $card-shadow;
+		}
+
+		.release-button {
+			background-color: $element-button-highlight-bg;
 		}
 	}
 

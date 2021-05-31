@@ -1,4 +1,4 @@
-class Deliver {
+declare class Deliver {
   public deliverId: string
   public createTime: Date
   // 已结束（完成、取消、异常） | 未接单 | 已接单未完成
@@ -18,7 +18,7 @@ class Deliver {
   public packageNumbers: number
 }
 
-class DeliverAPI {
+declare class DeliverAPI {
   /**
    * 创建快递请求
    * @param Deliver 仅包含必要数据的表单对象

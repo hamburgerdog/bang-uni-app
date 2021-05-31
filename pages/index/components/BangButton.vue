@@ -1,25 +1,24 @@
 <template>
-	<view class="box">
-		<uni-icons :type="bangButton.icon" color="#46A3ff" size="30"></uni-icons>
+	<view class="box" :style="{color:bangButton.textcolor}">
+		<uni-icons :type="bangButton.icon" :color="bangButton.color" size="30"></uni-icons>
 		<p>{{bangButton.name}}</p>
 	</view>
 </template>
 
 <script>
-	export default{
-		props:["bangButton"]
+	export default {
+		props: ["bangButton"]
 	}
 </script>
 
 <style lang="scss" scoped>
-	.box{
+	.box {
 		display: flex;
 		flex-direction: column;
-		
-		p{
+
+		p {
 			padding: 0;
 			font-size: 36rpx;
-			color: $element-headline;
 			line-height: 2;
 		}
 	}

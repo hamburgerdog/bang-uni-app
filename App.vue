@@ -13,4 +13,12 @@
 	page {
 		background-color: $page-bg;
 	}
+
+	.form-box {
+		background-color: $main-bg;
+		border-bottom-left-radius: $card-radius;
+		border-bottom-right-radius: $card-radius;
+		box-shadow: $card-shadow;
+		padding: 20rpx;
+	}
 </style>
