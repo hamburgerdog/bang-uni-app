@@ -16,7 +16,7 @@
 					open-type="navigate">
 					<bang-button class="bang-button" :bangButton="bangButton"></bang-button>
 				</navigator>
-				<view class="release-button" @click="popup()">
+				<view class="release-button" @click="popup">
 					<bang-button :bangButton="releaseButton"></bang-button>
 				</view>
 			</view>
@@ -25,9 +25,17 @@
 				<p>当前无订单</p>
 			</view>
 		</view>
-		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
-			direction="horizontal" @trigger="release" />
-		<cl-popup :visible.sync="visible" :size="600" direction="bottom"></cl-popup>
+		<view class="pop" v-show="visible" @click="popdown()">
+			<view class="pop-card" @click.stop="">
+				<p>请选择发布</p>
+				<view class="pop-card-items">
+					<view class="pop-card-item" v-for="item in buttons" :key="item.name" @click="release(item.name)">
+						<uni-icons :type="item.icon" color="46A3ff" size="40"></uni-icons>
+						<p>{{item.name}}</p>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -44,39 +52,24 @@
 					buttonColor: '#c6e0f9'
 				},
 				content: [{
-						iconPath: '/static/icon/fab-icon/operation.png',
-						selectedIconPath: '/static/icon/fab-icon/operation-sel.png',
 						path: "pages/releasepages/ReleaseWelfare",
-						text: '帮帮发布',
-						active: false
+						name: '帮帮'
 					},
 					{
-						iconPath: '/static/icon/fab-icon/agriculture.png',
-						selectedIconPath: '/static/icon/fab-icon/agriculture-sel.png',
 						path: "pages/releasepages/ReleaseFood",
-						text: '发布外卖',
-						active: false
+						name: '外卖',
 					},
 					{
-						iconPath: '/static/icon/fab-icon/packaging.png',
-						selectedIconPath: '/static/icon/fab-icon/packaging-sel.png',
 						path: "pages/releasepages/ReleaseDeliver",
-						text: '发布快递',
-						active: false
+						name: '快递',
 					},
 					{
-						iconPath: '/static/icon/fab-icon/helper.png',
-						selectedIconPath: '/static/icon/fab-icon/helper-sel.png',
 						path: "pages/releasepages/ReleaseHelper",
-						text: '发布互助',
-						active: false
+						name: '互助',
 					},
 					{
-						iconPath: '/static/icon/fab-icon/aside.png',
-						selectedIconPath: '/static/icon/fab-icon/aside-sel.png',
 						path: "pages/releasepages/ReleaseAside",
-						text: '发布闲置',
-						active: false
+						name: '闲置',
 					},
 				],
 				buttons: [{
@@ -133,30 +126,32 @@
 						index: 2,
 					}
 				],
-				visible: false
+				visible: false,
 			}
 		},
 		methods: {
-			release(e) {
-				this.content.forEach(function(item) {
-					item.active = false;
-				})
-				this.content[e.index].active = true;
-				uni.navigateTo({
-					url: this.content[e.index].path
-				})
-			},
 			popup() {
-				console.log('click')
 				this.visible = true
+			},
+			popdown() {
+				this.visible = false
+			},
+			release(name) {
+				this.content.forEach((item) => {
+					if (item.name === name) {
+						uni.navigateTo({
+							url: item.path
+						})
+						this.visible = false
+						return;
+					}
+				})
 			}
 		},
 		components: {
 			BangButton,
 		},
-		onHide() {
-			this.$refs.fab.close();
-		},
+		onHide() {},
 		onLoad() {},
 	}
 </script>
@@ -227,5 +222,48 @@
 		text-align: center;
 		color: $element-headline;
 		font-size: 40rpx;
+	}
+
+	.pop {
+		position: fixed;
+		height: 100vh;
+		width: 100%;
+		background-color: rgba($color: #333, $alpha: .6);
+		z-index: 99;
+		top: 0;
+
+		.pop-card {
+			position: absolute;
+			left: 5%;
+			width: 90%;
+			height: 500rpx;
+			background-color: #FFF;
+			border-radius: $card-radius;
+			box-shadow: $card-shadow;
+			bottom: 100rpx;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			color: $element-headline;
+
+			>p {
+				font-size: 52rpx;
+				line-height: 2;
+			}
+
+			.pop-card-items {
+				display: grid;
+				width: 76%;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 42rpx;
+				text-align: center;
+				margin-top: 20rpx;
+
+				>p {
+					font-size: 40rpx;
+				}
+			}
+		}
 	}
 </style>
