@@ -1,14 +1,19 @@
 <template>
 	<view>
 		<RouterFab></RouterFab>
-		<view style="background-color: #fff;">
-			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+		<view class="bang-title">
+			<view style="background-color: #fff;">
+				<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+			</view>
+			<cl-filter-bar @change="onChange" class="filter-bar">
+				<cl-filter-item label="时间优先" />
+				<cl-filter-item label="酬金优先" />
+				<cl-filter-item label="送货地点" v-model="destCategory" :options="destCategoryList" type="dropdown" multiple
+					prop="rank" theme="grid" />
+				<cl-filter-item label="取货地点" v-model="pickUpAddress" :options="pickUpAddressList" type="dropdown"
+					multiple prop="rank" theme="grid" />
+			</cl-filter-bar>
 		</view>
-		<cl-filter-bar @change="onChange" class="filter-bar">
-			<cl-filter-item label="时间优先" />
-			<cl-filter-item label="酬金优先" />
-			<cl-filter-item label="地点筛选" v-model="arr" :options="list" type="dropdown" multiple prop="rank" theme="grid"/>
-		</cl-filter-bar>
 	</view>
 </template>
 
@@ -16,20 +21,50 @@
 	export default {
 		data() {
 			return {
-				list: [{
-						label: "菜鸟驿站",
-						value: 1
+				destCategoryList: [{
+						label: "梅苑",
+						value: '梅苑’'
 					},
 					{
-						label: "丰巢快递柜",
-						value: 2
+						label: "兰苑",
+						value: '兰苑'
+					},
+					{
+						label: "竹苑",
+						value: '竹苑'
+					},
+					{
+						label: "菊苑",
+						value: '菊苑'
 					},
 					{
 						label: "其他",
-						value: 3
+						value: '其他'
 					}
 				],
-				arr: [1],
+				pickUpAddressList: [{
+						label: "菜鸟",
+						value: '菜鸟’'
+					},
+					{
+						label: "丰巢",
+						value: '丰巢'
+					},
+					{
+						label: "顺丰",
+						value: '顺丰'
+					},
+					{
+						label: "京东",
+						value: '京东'
+					},
+					{
+						label: "其他",
+						value: '其他'
+					}
+				],
+				destCategory: [],
+				pickUpAddress: []
 			}
 		},
 		methods: {

@@ -134,6 +134,7 @@
 			},
 			select(value) {
 				if (value === 'email') this.isEmail = true
+				else this.isEmail = false
 			}
 		}
 	}

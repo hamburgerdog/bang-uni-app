@@ -21,9 +21,25 @@
 		box-shadow: $card-shadow;
 		padding: 20rpx;
 	}
-	
+
 	.contact-category,
 	.contact-info {
 		margin-right: 10rpx;
+	}
+	
+	.contact-category{
+		width: 26%;
+		text-align: center;
+	}
+	
+	.contact-info{
+		width: 42%;
+	}
+
+	.bang-title {
+		position: fixed;
+		z-index: 99;
+		top: 0;
+		width: 100%;
 	}
 </style>
