@@ -152,7 +152,13 @@
 			BangButton,
 		},
 		onHide() {},
-		onLoad() {},
+		onLoad() {
+			uni.login({
+				success(res) {
+					console.log(res)
+				}
+			})
+		},
 	}
 </script>
 
