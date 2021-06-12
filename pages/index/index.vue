@@ -157,17 +157,6 @@
 </script>
 
 <style lang="scss">
-	// .title {
-	// 	background-color: $element-bg;
-	// 	height: 400rpx;
-	// 	overflow: hidden;
-	// 	margin-bottom: -40rpx;
-
-	// 	image {
-	// 		min-width: 100%;
-	// 	}
-	// }
-
 	.main-box {
 		position: absolute;
 		overflow: hidden;
@@ -225,12 +214,6 @@
 	}
 
 	.pop {
-		position: fixed;
-		height: 100vh;
-		width: 100%;
-		background-color: rgba($color: #333, $alpha: .6);
-		z-index: 99;
-		top: 0;
 
 		.pop-card {
 			position: absolute;

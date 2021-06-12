@@ -26,13 +26,13 @@
 	.contact-info {
 		margin-right: 10rpx;
 	}
-	
-	.contact-category{
+
+	.contact-category {
 		width: 26%;
 		text-align: center;
 	}
-	
-	.contact-info{
+
+	.contact-info {
 		width: 42%;
 	}
 
@@ -41,5 +41,14 @@
 		z-index: 99;
 		top: 0;
 		width: 100%;
+	}
+
+	.pop {
+		position: fixed;
+		height: 100vh;
+		width: 100%;
+		background-color: rgba($color: #333, $alpha: .6);
+		z-index: 99;
+		top: 0;
 	}
 </style>
