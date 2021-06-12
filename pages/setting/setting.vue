@@ -28,7 +28,8 @@
 					openId: "",
 					imageSrc: "../../static/dog.jpg",
 					nickName: "登录/注册",
-					email: "123@qq.com"
+					email: "123@qq.com",
+					isLogin: false,
 				},
 				settings: [{
 						index: 0,
@@ -58,15 +59,24 @@
 		},
 		methods: {
 			register() {
+				if (this.user.isLogin) {
+					uni.showToast({
+						title: "您已经登录了！",
+						icon: "success",
+						duration: 2000,
+					})
+					return
+				}
+				const that = this
 				uni.getUserProfile({
 					desc: '获取你的昵称、头像、地区及性别',
 					success: res => {
 						uni.request({
 							method: "POST",
-							url: "http://127.0.0.1:8000/user/register",
+							url: that.$api.getRegisterUrl(),
 							dataType: JSON,
 							data: {
-								code: this.user.openId,
+								openId: that.user.openId,
 								nickName: res.userInfo.nickName,
 								picUrl: res.userInfo.avatarUrl,
 							},
@@ -77,9 +87,19 @@
 									duration: 2000,
 								})
 							},
-							success() {
-								this.user.imageSrc = res.userInfo.avatarUrl
-								this.user.nickName = res.userInfo.nickName
+							success(response) {
+								const resData = JSON.parse(response.data)
+								if(resData.code === 2000){
+									that.user.imageSrc = res.userInfo.avatarUrl
+									that.user.nickName = res.userInfo.nickName
+									that.user.isLogin = true
+								}else{
+									uni.showToast({
+										title: resData.msg,
+										icon: "error",
+										duration: 2000,
+									})
+								}
 							}
 						})
 					},
@@ -87,7 +107,7 @@
 						uni.showToast({
 							title: '您拒绝了请求:D',
 							icon: 'error',
-							duration: 2000
+							duration: 2000,
 						});
 						return;
 					}
@@ -99,11 +119,20 @@
 			uni.login({
 				success(res) {
 					uni.request({
-						url: `http://127.0.0.1:8000/user/login/${res.code}`,
+						url: that.$api.getLoginUrl(res.code),
 						success(res) {
-							that.user.openId = res[1].data.id
-							that.user.nickName = res[1].data["nick_name"]
-							that.user.imageSrc = res[1].data["pic_url"]
+							that.user.openId = res.data.data.id
+							if (res.data.code == 1000) {
+								that.user.nickName = res.data.data["nick_name"]
+								that.user.imageSrc = res.data.data["pic_url"]
+								that.user.isLogin = true
+							} else {
+								uni.showToast({
+									title: res.data.msg,
+									icon: "error",
+									duration: 2000,
+								})
+							}
 						},
 						fail() {
 							uni.showToast({
