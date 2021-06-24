@@ -10,8 +10,8 @@
 			<cl-filter-item label="性别限定" v-model="gender" :options="genderList" type="dropdown" prop="rank"
 				theme="grid" />
 		</cl-filter-bar>
-		<uni-notice-bar scrollable="true" single="true"
-			text="禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助 , 禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助" speed="80" showIcon="true" />
+		<uni-notice-bar scrollable="true" single="true" class="notice-bar"
+			text="禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助 , 禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助" speed="80" showIcon="true"/>
 		<view class="card-box" v-if="visiable">
 			<view class="card" v-for="card in helpers" :key="card.index">
 				<MyCard :card="card"></MyCard>
@@ -110,5 +110,9 @@
 			position: relative;
 			margin-bottom: 20rpx;
 		}
+	}
+	.notice-bar{
+		position: sticky;
+		top: 0;
 	}
 </style>

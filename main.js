@@ -4,8 +4,10 @@ import {
 	RouterMount
 } from './router.js' //路径换成自己的
 import App from './App.vue'
+import api from './utils/api/api.js'
 Vue.use(router)
 
+Vue.prototype.$api = api
 Vue.config.productionTip = false
 
 App.mpType = 'app'

@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view @longpress="reflash()">
 		<uni-fab :pattern="pattern" :content="content" horizontal="right" vertical="bottom" direction="vertical"
 			@trigger="trigger" />
 	</view>
@@ -13,7 +13,7 @@
 					color: '#272343',
 					backgroundColor: '#FFFFFF',
 					selectedColor: '#007AFF',
-					buttonColor: '#aaaaaa'
+					buttonColor: '#272343'
 				},
 				content: [{
 						iconPath: '/static/icon/fab-icon/operation.png',
@@ -62,6 +62,17 @@
 				uni.redirectTo({
 					url: this.content[e.index].path
 				})
+			},
+			reflash() {
+				uni.pageScrollTo({
+					scrollTop: 0
+				})
+				uni.showToast({
+					title: '刷新成功',
+					icon: 'success',
+					duration: 2000
+				});
+				this.$emit('reflash')
 			},
 		},
 		components: {

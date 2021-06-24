@@ -5,7 +5,7 @@
 		</view>
 		<view class="user-page">
 			<view class="user-box">
-				<image @click="login" class="user-image" :src="user.imageSrc" mode="widthFix"></image>
+				<image @click="register()" class="user-image" :src="user.imageSrc" mode="widthFix"></image>
 				<view class="user-info">
 					<p>{{user.nickName}}</p>
 					<p>{{user.phone}}</p>
@@ -56,14 +56,16 @@
 	</view>
 </template>
 
-<script>
+<script>	
 	export default {
 		data() {
 			return {
 				user: {
+					openId: "",
 					imageSrc: "../../static/dog.jpg",
 					nickName: "登录/注册",
-					phone: "请绑定手机"
+					phone: "请绑定手机号码",
+					isLogin: false,
 				},
 				settings: [{
 					index: 0,
@@ -119,29 +121,98 @@
 				this.showTelCheck = false
 				this.showStuCheck = false
 			},
-			login() {
+			register() {
+				if (this.user.isLogin) {
+					uni.showToast({
+						title: "您已经登录了！",
+						icon: "success",
+						duration: 2000,
+					})
+					return
+				}
+				const that = this
 				uni.getUserProfile({
 					desc: '获取你的昵称、头像、地区及性别',
 					success: res => {
-						this.user.imageSrc = res.userInfo.avatarUrl
-						this.user.nickName = res.userInfo.nickName
+						uni.request({
+							method: "POST",
+							url: that.$api.getRegisterUrl(),
+							dataType: JSON,
+							data: {
+								openId: that.user.openId,
+								nickName: res.userInfo.nickName,
+								picUrl: res.userInfo.avatarUrl,
+							},
+							fail() {
+								uni.showToast({
+									title: "服务器出小差啦！",
+									icon: "error",
+									duration: 2000,
+								})
+							},
+							success(response) {
+								const resData = JSON.parse(response.data)
+								if (resData.code === 2000) {
+									that.user.imageSrc = res.userInfo.avatarUrl
+									that.user.nickName = res.userInfo.nickName
+									that.user.isLogin = true
+								} else {
+									uni.showToast({
+										title: resData.msg,
+										icon: "error",
+										duration: 2000,
+									})
+								}
+							}
+						})
 					},
 					fail: res => {
 						uni.showToast({
 							title: '您拒绝了请求:D',
 							icon: 'error',
-							duration: 2000
+							duration: 2000,
 						});
 						return;
 					}
 				});
 			},
-			animationEnd(e) {
-				if (this.isEndAnimation) {
-					this.isPop = false
-				}
-				this.isEndAnimation = !this.isEndAnimation
+		},
+		animationEnd(e) {
+			if (this.isEndAnimation) {
+				this.isPop = false
 			}
+			this.isEndAnimation = !this.isEndAnimation
+		},
+		beforeMount() {
+			const that = this
+			uni.login({
+				success(res) {
+					uni.request({
+						url: that.$api.getLoginUrl(res.code),
+						success(res) {
+							that.user.openId = res.data.data.id
+							if (res.data.code == 1000) {
+								that.user.nickName = res.data.data["nick_name"]
+								that.user.imageSrc = res.data.data["pic_url"]
+								that.user.isLogin = true
+							} else {
+								uni.showToast({
+									title: res.data.msg,
+									icon: "error",
+									duration: 2000,
+								})
+							}
+						},
+						fail() {
+							uni.showToast({
+								title: "服务器出小差啦！",
+								icon: "error",
+								duration: 2000,
+							})
+						}
+					})
+				}
+			})
 		}
 	}
 </script>
