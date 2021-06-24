@@ -8,43 +8,50 @@
 				<image @click="login" class="user-image" :src="user.imageSrc" mode="widthFix"></image>
 				<view class="user-info">
 					<p>{{user.nickName}}</p>
-					<p>{{user.email}}</p>
+					<p>{{user.phone}}</p>
 				</view>
 			</view>
 			<view class="setting-box">
-				<!-- 个人信息 -->
-				<view>
+				<view v-for="settingItem in settings" :key="settingItem.index"
+					@click="settingItemClick(settingItem.index)">
 					<view>
-						<uni-icons type="contact" color="#272343" size="24"></uni-icons>
-						<p>个人信息</p>
-					</view>
-					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
-				</view>
-				<!-- 收藏闲置 -->
-				<view>
-					<view>
-						<uni-icons type="heart-filled" color="#272343" size="24"></uni-icons>
-						<p>收藏闲置</p>
-					</view>
-					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
-				</view>
-				<!-- 意见反馈 -->
-				<view>
-					<view>
-						<uni-icons type="info-filled" color="#272343" size="24"></uni-icons>
-						<p>意见反馈</p>
-					</view>
-					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
-				</view>
-				<!-- 联系客服 -->
-				<view>
-					<view>
-						<uni-icons type="chat-filled" color="#272343" size="24"></uni-icons>
-						<p>联系客服</p>
+						<uni-icons :type="settingItem.icon" color="#272343" size="24"></uni-icons>
+						<p>{{settingItem.msg}}</p>
 					</view>
 					<uni-icons type="arrowright" color="#272343" size="24"></uni-icons>
 				</view>
 			</view>
+		</view>
+		<view class="pop" v-show="isPop" @click="popDown()">
+			<uni-transition class="pop-tran" :mode-class="['fade','slide-bottom']" :show="showTelCheck"
+				@change="animationEnd">
+				<view class="pop-card" @click.stop="">
+					<view class="pop-tel-form">
+						<cl-input class="pop-tel-input" type="number" placeholder="请输入您的手机号码"></cl-input>
+						<cl-button class="pop-tel-button" type="primary" @tap="onSubmit">获取验证码</cl-button>
+					</view>
+					<view class="pt-text">
+						<text>验证码(30分钟内有效):</text>
+					</view>
+					<view class="pop-tel-captcha">
+						<cl-captcha :length="6" :height="'80rpx'"></cl-captcha>
+					</view>
+				</view>
+			</uni-transition>
+			<uni-transition class="pop-tran" :mode-class="['fade','slide-bottom']" :show="showStuCheck"
+				@change="animationEnd">
+				<view class="pop-card" @click.stop="">
+					<view class="ps-form-item">
+						<label for="stu-id">账号：</label>
+						<uni-easyinput id="stu-id" class="ps-input" type="number" placeholder="请输入学生账号" />
+					</view>
+					<view class="ps-form-item">
+						<label for="stu-pd">密码：</label>
+						<uni-easyinput id="stu-pd" class="ps-input" type="password" />
+					</view>
+					<button class="ps-button">登录</button>
+				</view>
+			</uni-transition>
 		</view>
 	</view>
 </template>
@@ -56,11 +63,62 @@
 				user: {
 					imageSrc: "../../static/dog.jpg",
 					nickName: "登录/注册",
-					email: "123@qq.com"
-				}
+					phone: "请绑定手机"
+				},
+				settings: [{
+					index: 0,
+					msg: '绑定手机',
+					icon: 'contact'
+				}, {
+					index: 1,
+					msg: '学生认证',
+					icon: 'checkmarkempty'
+				}, {
+					index: 2,
+					msg: '闲置收藏',
+					icon: 'heart-filled'
+				}, {
+					index: 3,
+					msg: '意见反馈',
+					icon: 'info-filled'
+				}, {
+					index: 4,
+					msg: '联系客服',
+					icon: 'chat-filled'
+				}, ],
+				isPop: false,
+				showTelCheck: false,
+				showStuCheck: false,
+				isEndAnimation: false,
 			};
 		},
 		methods: {
+			checkTelephone() {
+				this.showTelCheck = true
+				this.isPop = true
+			},
+			checkStudent() {
+				this.showStuCheck = true
+				this.isPop = true
+			},
+			settingItemClick(index) {
+				switch (index) {
+					//	绑定手机
+					case 0:
+						this.checkTelephone()
+						break
+						//	绑定学号 
+					case 1:
+						this.checkStudent()
+						break
+					default:
+						return
+				}
+			},
+			popDown() {
+				this.showTelCheck = false
+				this.showStuCheck = false
+			},
 			login() {
 				uni.getUserProfile({
 					desc: '获取你的昵称、头像、地区及性别',
@@ -77,6 +135,12 @@
 						return;
 					}
 				});
+			},
+			animationEnd(e) {
+				if (this.isEndAnimation) {
+					this.isPop = false
+				}
+				this.isEndAnimation = !this.isEndAnimation
 			}
 		}
 	}
@@ -89,8 +153,8 @@
 		box-sizing: border-box;
 		margin-bottom: -40rpx;
 		overflow: hidden;
-		
-		image{
+
+		image {
 			min-width: 100%;
 		}
 	}
@@ -155,6 +219,72 @@
 				justify-content: space-between;
 				align-items: center;
 			}
+		}
+	}
+
+	.pop {
+		height: 100vh;
+		position: relative;
+		margin-top: -100vh;
+		background-color: rgba($color: #000, $alpha: 0.6);
+
+		.pop-tel-form {
+			display: flex;
+			justify-content: center;
+			margin-top: 20rpx;
+			padding: 10rpx;
+
+			.pop-tel-input {
+				flex-grow: 4;
+				margin-right: 30rpx;
+			}
+
+			.pop-tel-button {
+				flex-grow: 1;
+			}
+		}
+
+		.pt-text {
+			font-size: 1.2rem;
+			color: gray;
+			padding: 20rpx;
+			margin-top: 10rpx;
+		}
+
+		.pop-tran {
+			position: absolute;
+			top: 60%;
+			width: 100%;
+		}
+
+		.pop-card {
+			padding: 40rpx;
+			width: 100%;
+			box-sizing: border-box;
+			height: 40vh;
+			background-color: white;
+			border-top-left-radius: $card-radius;
+			border-top-right-radius: $card-radius;
+		}
+
+		.ps-form-item {
+			margin-top: 30rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.ps-input {
+				width: 80%;
+			}
+		}
+
+		.ps-button {
+			margin: auto;
+			margin-top: 30rpx;
+			width: 40%;
+			font-size: 1rem;
+			color: white;
+			background-color: $cl-color-primary;
 		}
 	}
 </style>
