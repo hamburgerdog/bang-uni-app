@@ -10,10 +10,10 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		<view class="main" @click="goto">
+		<view class="main">
 			<view class="grid-box">
 				<navigator v-for="bangButton in buttons" :key="bangButton.name" :url="bangButton.path"
-					open-type="navigate">
+					open-type="navigate" @click="createOrder(bangButton.name)">
 					<bang-button :bangButton="bangButton"></bang-button>
 				</navigator>
 			</view>
@@ -22,8 +22,17 @@
 				<p>当前无订单</p>
 			</view>
 		</view>
-		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
-			direction="horizontal" @trigger="trigger" />
+		<view class="pop" v-show="visible" @click="popdown()">
+			<view class="pop-card" @click.stop="">
+				<p>请选择发布</p>
+				<view class="pop-card-items">
+					<view class="pop-card-item" v-for="item in releaseButtons" :key="item.name" @click="release(item)">
+						<uni-icons :type="item.icon" color="#ffd803" size="40"></uni-icons>
+						<p>{{item.name}}</p>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -33,46 +42,16 @@
 	export default {
 		data() {
 			return {
+				visible: false,
 				pattern: {
 					color: '#272343',
 					backgroundColor: '#FFFFFF',
 					selectedColor: '#007AFF',
 					buttonColor: '#272343'
 				},
-				content: [{
-						iconPath: '/static/icon/fab-icon/operation.png',
-						selectedIconPath: '/static/icon/fab-icon/operation-sel.png',
-						text: '帮帮发布',
-						active: false
-					},
-					{
-						iconPath: '/static/icon/fab-icon/agriculture.png',
-						selectedIconPath: '/static/icon/fab-icon/agriculture-sel.png',
-						text: '发布外卖',
-						active: true
-					},
-					{
-						iconPath: '/static/icon/fab-icon/packaging.png',
-						selectedIconPath: '/static/icon/fab-icon/packaging-sel.png',
-						text: '发布快递',
-						active: false
-					},
-					{
-						iconPath: '/static/icon/fab-icon/helper.png',
-						selectedIconPath: '/static/icon/fab-icon/helper-sel.png',
-						text: '发布互助',
-						active: false
-					},
-					{
-						iconPath: '/static/icon/fab-icon/aside.png',
-						selectedIconPath: '/static/icon/fab-icon/aside-sel.png',
-						text: '发布闲置',
-						active: false
-					},
-				],
 				buttons: [{
 						name: '帮帮',
-						icon: 'paperplane-filled',
+						icon: 'heart-filled',
 						path: '/pages/bangpages/BangWelfares'
 					},
 					{
@@ -96,9 +75,35 @@
 						path: '/pages/bangpages/BangAsides'
 					},
 					{
-						name: '赞助',
-						icon: 'heart-filled',
+						name: '发布',
+						icon: 'paperplane-filled',
 						path: '/pages/index/indexs'
+					}
+				],
+				releaseButtons: [{
+						name: '发布帮帮',
+						icon: 'heart',
+						path: '/pages/releasepages/ReleaseWelfare'
+					},
+					{
+						name: '发布快递',
+						icon: 'flag',
+						path: '/pages/releasepages/ReleaseDeliver'
+					},
+					{
+						name: '发布外卖',
+						icon: 'cart',
+						path: '/pages/releasepages/ReleaseFood'
+					},
+					{
+						name: '发布互助',
+						icon: 'chatboxes',
+						path: '/pages/releasepages/ReleaseHelper'
+					},
+					{
+						name: '发布闲置',
+						icon: 'chat',
+						path: '/pages/releasepages/ReleaseAside'
 					}
 				],
 				list: [{
@@ -119,26 +124,27 @@
 
 		},
 		methods: {
-			trigger(e) {
-				this.content.forEach(function(item) {
-					item.active = false;
-				})
-				this.content[e.index].active = true;
+			createOrder(buttonName) {
+				if (buttonName !== '发布') return
+				this.popup()
 			},
-			goto() {
-				console.log('goto_clicked')
-				uni.getUserInfo({
-					success(res){
-						console.log(res)
-					}
+			release(item) {
+				uni.navigateTo({
+					url: item.path
 				})
-			}
+			},
+			popup() {
+				this.visible = true
+			},
+			popdown() {
+				this.visible = false
+			},
 		},
 		components: {
 			BangButton,
 		},
 		onHide() {
-			this.$refs.fab.close()
+			this.visible = false
 		}
 	}
 </script>
@@ -204,5 +210,47 @@
 		text-align: center;
 		color: $element-headline;
 		font-size: 40rpx;
+	}
+
+	.pop {
+		position: fixed;
+		height: 100vh;
+		width: 100%;
+		background-color: rgba($color: #333, $alpha: .6);
+		z-index: 99;
+		top: 0;
+
+		.pop-card {
+			position: absolute;
+			width: 100%;
+			height: 600rpx;
+			background-color: #FFF;
+			border-top-left-radius: $card-radius;
+			border-top-right-radius: $card-radius;
+			box-shadow: $card-shadow;
+			bottom: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			color: $element-headline;
+
+			>p {
+				font-size: 52rpx;
+				line-height: 2;
+			}
+
+			.pop-card-items {
+				display: grid;
+				width: 76%;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 42rpx;
+				text-align: center;
+				margin-top: 20rpx;
+
+				>p {
+					font-size: 40rpx;
+				}
+			}
+		}
 	}
 </style>

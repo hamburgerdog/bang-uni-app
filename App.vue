@@ -13,4 +13,26 @@
 	page {
 		background-color: $page-bg;
 	}
+
+	.form-box {
+		background-color: $main-bg;
+		border-bottom-left-radius: $card-radius;
+		border-bottom-right-radius: $card-radius;
+		box-shadow: $card-shadow;
+		padding: 20rpx;
+	}
+
+	.contact-category,
+	.contact-info {
+		margin-right: 10rpx;
+	}
+
+	.contact-category {
+		width: 26%;
+		text-align: center;
+	}
+
+	.contact-info {
+		width: 42%;
+	}
 </style>

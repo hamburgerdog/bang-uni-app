@@ -88,52 +88,78 @@
 			}
 		}
 
-	    ,{
-            "path" : "pages/detailpages/BangAside",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "帮帮闲置",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/detailpages/BangDeliver",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "帮帮快递",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/detailpages/BangFood",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "帮帮外卖",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/detailpages/BangHelper",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "帮帮互助",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/detailpages/BangWelfare",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "校园帮帮",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+		, {
+			"path": "pages/detailpages/BangAside",
+			"style": {
+				"navigationBarTitleText": "帮帮闲置",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/detailpages/BangDeliver",
+			"style": {
+				"navigationBarTitleText": "帮帮快递",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/detailpages/BangFood",
+			"style": {
+				"navigationBarTitleText": "帮帮外卖",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/detailpages/BangHelper",
+			"style": {
+				"navigationBarTitleText": "帮帮互助",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/detailpages/BangWelfare",
+			"style": {
+				"navigationBarTitleText": "校园帮帮",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/releasepages/ReleaseWelfare",
+			"style": {
+				"navigationBarTitleText": "发布帮帮",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/releasepages/ReleaseDeliver",
+			"style": {
+				"navigationBarTitleText": "发布快递",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/releasepages/ReleaseAside",
+			"style": {
+				"navigationBarTitleText": "发布闲置",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/releasepages/ReleaseHelper",
+			"style": {
+				"navigationBarTitleText": "发布互助",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/releasepages/ReleaseFood",
+			"style": {
+				"navigationBarTitleText": "发布外卖",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
