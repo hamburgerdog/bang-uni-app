@@ -4,7 +4,7 @@
 		<view style="background-color: #fff;">
 			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
 		</view>
-		<cl-filter-bar @change="onChange" class="filter-bar">
+		<cl-filter-bar @change="handleChange()" class="filter-bar">
 			<cl-filter-item label="寻物启事" prop="寻物启事" value="true" />
 			<cl-filter-item label="失物招领" prop="失物招领" value="true" />
 			<cl-filter-item label="校园帮帮" prop="校园帮帮" value="true" />
@@ -13,6 +13,7 @@
 			<view class="card" v-for="card in welfares" :key="card.id">
 				<MyCard :card="card"></MyCard>
 			</view>
+			<cl-loadmore background-color="#f9f9f9" :loading="loading" :finish="finished"></cl-loadmore>
 		</view>
 		<view class="card-box" v-else>
 			<p>页面加载中。。。</p>
@@ -26,49 +27,65 @@
 			return {
 				welfares: [],
 				visiable: false,
+				loading: false,
+				finished: false,
+				selector: new Set(['寻物启事', '失物招领', '校园帮帮']),
 			}
 		},
 		methods: {
-			onChange({
+			updateShowState() {
+				this.welfares.forEach(item => {
+					if (this.selector.has(item.moreText)) {
+						item.show = true
+					} else {
+						item.show = false
+					}
+				})
+			},
+			getWelfares(welfareList) {
+				welfareList.forEach(item => {
+					this.welfares.push({
+						...item,
+						showMore: true,
+						moreText: item.catagory,
+						showFooter: true,
+						footerText: item.createTime,
+						show: false
+					})
+				})
+				this.welfares.sort(function(a, b) {
+					return new Date(b.footerText) - new Date(a.footerText)
+				})
+				this.updateShowState()
+			},
+			handleChange({
 				prop,
 				value
 			}) {
 				if (value) {
-					this.welfares.forEach(item => {
-						if (item.moreText === prop) {
-							item.show = true
-						}
-					})
+					this.selector.add(prop)
 				} else {
-					this.welfares.forEach(item => {
-						if (item.moreText === prop) {
-							item.show = false
-						}
-					})
+					this.selector.delete(prop)
 				}
+				this.updateShowState()
 			}
-		},
-		components: {
-
 		},
 		beforeMount() {
 			uni.request({
 				url: this.$api.getWelfaresUrl(this.welfares.length),
 				success: (res) => {
-					res.data.data.list.forEach(item => {
-						this.welfares.push({
-							...item,
-							showMore: true,
-							moreText: item.catagory,
-							showFooter: true,
-							footerText: item.createTime,
-							show: true,
-						})
-					})
-					this.welfares.sort(function(a, b) {
-						return new Date(b.footerText) - new Date(a.footerText)
-					})
+					this.getWelfares(res.data.data.list)
 					this.visiable = true
+				}
+			})
+		},
+		onReachBottom() {
+			this.loading = true
+			uni.request({
+				url: this.$api.getWelfaresUrl(this.welfares.length),
+				success: (res) => {
+					this.getWelfares(res.data.data.list)
+					this.loading = false
 				}
 			})
 		}
