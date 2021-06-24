@@ -11,7 +11,7 @@
 				theme="grid" />
 		</cl-filter-bar>
 		<uni-notice-bar scrollable="true" single="true" class="notice-bar"
-			text="禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助 , 禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助" speed="80" showIcon="true"/>
+			text="禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助 , 禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助" speed="80" showIcon="true" />
 		<view class="card-box" v-if="visiable">
 			<view class="card" v-for="card in helpers" :key="card.index">
 				<MyCard :card="card"></MyCard>
@@ -29,7 +29,8 @@
 			return {
 				helpers: [{
 						title: '测试Test',
-						index: 1,
+						id: 1,
+						show: true,
 						showMore: true,
 						moreText: '更多详情',
 						images: [],
@@ -41,7 +42,8 @@
 					},
 					{
 						title: '测试Test',
-						index: 2,
+						id: 2,
+						show: true,
 						showMore: false,
 						moreText: '更多详情',
 						images: [],
@@ -53,7 +55,8 @@
 					},
 					{
 						title: '测试Test',
-						index: 3,
+						id: 3,
+						show: true,
 						showMore: false,
 						moreText: '更多详情',
 						images: [],
@@ -65,7 +68,8 @@
 					},
 					{
 						title: '测试Test',
-						index: 4,
+						id: 4,
+						show: true,
 						showMore: false,
 						moreText: '更多详情',
 						images: [],
@@ -103,15 +107,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.card-box {
-		padding: 0 20rpx;
-
-		.card {
-			position: relative;
-			margin-bottom: 20rpx;
-		}
-	}
-	.notice-bar{
+	.notice-bar {
 		position: sticky;
 		top: 0;
 	}

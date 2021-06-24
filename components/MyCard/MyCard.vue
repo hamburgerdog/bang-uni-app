@@ -1,5 +1,5 @@
 <template>
-	<view class="card-box" @click="clickCard">
+	<view class="card-box" @click="clickCard" v-show="card.show">
 		<view class="card-title">
 			<p>{{card.title}}</p>
 			<view v-if="card.showMore" class="title-more">
@@ -7,8 +7,9 @@
 			</view>
 		</view>
 		<view class="card-content">
-			<image v-for="image in card.images" :key="image.index" :src="image.src" mode="aspectFill"
-				style="max-height: 100rpx;" />
+			<view class="card-images-box">
+				<image v-for="image in card.images" :key="image.id" :src="image.src" mode="center" />
+			</view>
 			<text>
 				{{card.content}}
 			</text>
@@ -28,7 +29,7 @@
 			};
 		},
 		props: ['card'],
-		methods:{
+		methods: {
 			clickCard() {
 				uni.navigateTo({
 					url: this.card.path
@@ -47,6 +48,16 @@
 		border-radius: $card-radius;
 		box-shadow: $card-shadow;
 		background-color: #fff;
+
+		.card-images-box {
+			display: flex;
+			gap: 30rpx;
+
+			image {
+				max-width: 180rpx;
+				max-height: 150rpx;
+			}
+		}
 
 		.card-title {
 			display: flex;

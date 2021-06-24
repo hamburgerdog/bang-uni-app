@@ -1,12 +1,18 @@
 import base from "./base.js"
 
-const url = base.localhost
-
+const userUrl = base.localhost
+const httpUrl = base.fastmockhost
 export default {
 	getLoginUrl(code) {
-		return `${url}/user/login/${code}`
+		return `${userUrl}/user/login/${code}`
 	},
 	getRegisterUrl() {
-		return `${url}/user/register`
+		return `${userUrl}/user/register`
+	},
+	getAsidesUrl(offset){
+		return `${httpUrl}/asides/${offset}`
+	},
+	getWelfaresUrl(offset){
+		return `${httpUrl}/welfares/${offset}`
 	},
 }

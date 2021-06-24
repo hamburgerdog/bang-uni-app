@@ -10,6 +10,14 @@
 			<cl-filter-item label="课本书籍" />
 			<cl-filter-item label="其他" />
 		</cl-filter-bar>
+		<view class="card-box" v-if="visiable">
+			<view class="card" v-for="card in asides" :key="card.id">
+				<MyCard :card="card"></MyCard>
+			</view>
+		</view>
+		<view class="card-box" v-else>
+			<p>页面加载中。。。</p>
+		</view>
 	</view>
 </template>
 
@@ -17,13 +25,31 @@
 	export default {
 		data() {
 			return {
+				asides: [],
+				visiable:false,
 			}
 		},
 		methods: {
 			onChange() {}
 		},
-		components: {
-
+		components: {},
+		beforeMount() {
+			uni.request({
+				url: this.$api.getAsidesUrl(this.asides.length),
+				success: (res) => {
+					console.log(res)
+					res.data.data.list.forEach(item=>{
+						this.asides.push({
+							...item,
+							showMore: true,
+							moreText:item.catagory,
+							showFooter:true,
+							footText:item.createTime
+						})
+					})
+					this.visiable=true
+				}
+			})
 		}
 	}
 </script>
