@@ -23,15 +23,19 @@
 			</view>
 		</view>
 		<view class="pop" v-show="visible" @click="popdown()">
-			<view class="pop-card" @click.stop="">
-				<p>请选择发布</p>
-				<view class="pop-card-items">
-					<view class="pop-card-item" v-for="item in releaseButtons" :key="item.name" @click="release(item)">
-						<uni-icons :type="item.icon" color="#ffd803" size="40"></uni-icons>
-						<p>{{item.name}}</p>
+			<uni-transition class="pop-tran" :mode-class="['fade','slide-bottom']" :show="showCard"
+				@change="animationEnd()">
+				<view class="pop-card" @click.stop="">
+					<p>请选择发布</p>
+					<view class="pop-card-items">
+						<view class="pop-card-item" v-for="item in releaseButtons" :key="item.name"
+							@click="release(item)">
+							<uni-icons :type="item.icon" color="#ffd803" size="40"></uni-icons>
+							<p>{{item.name}}</p>
+						</view>
 					</view>
 				</view>
-			</view>
+			</uni-transition>
 		</view>
 	</view>
 </template>
@@ -43,6 +47,8 @@
 		data() {
 			return {
 				visible: false,
+				showCard: false,
+				isEndAnimation: false,
 				pattern: {
 					color: '#272343',
 					backgroundColor: '#FFFFFF',
@@ -135,10 +141,17 @@
 			},
 			popup() {
 				this.visible = true
+				this.showCard = true
 			},
 			popdown() {
-				this.visible = false
+				this.showCard = false
 			},
+			animationEnd(e) {
+				if (this.isEndAnimation) {
+					this.visible = false
+				}
+				this.isEndAnimation = !this.isEndAnimation
+			}
 		},
 		components: {
 			BangButton,
@@ -216,9 +229,15 @@
 		position: fixed;
 		height: 100vh;
 		width: 100%;
-		background-color: rgba($color: #333, $alpha: .6);
+		background-color: rgba($color: #000, $alpha: .6);
 		z-index: 99;
 		top: 0;
+
+		.pop-tran {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+		}
 
 		.pop-card {
 			position: absolute;
