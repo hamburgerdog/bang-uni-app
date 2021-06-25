@@ -51,11 +51,11 @@
 
 		.card-images-box {
 			display: flex;
-			gap: 30rpx;
 
 			image {
 				max-width: 180rpx;
 				max-height: 150rpx;
+				margin: 15rpx;
 			}
 		}
 

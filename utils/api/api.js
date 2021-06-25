@@ -2,6 +2,16 @@ import base from "./base.js"
 
 const userUrl = base.localhost
 const httpUrl = base.fastmockhost
+
+async function getDataList(url) {
+	const request = uni.request({
+		url
+	})
+	return await request.then((res) => {
+		return res[1].data.data.list
+	})
+}
+
 export default {
 	getLoginUrl(code) {
 		return `${userUrl}/user/login/${code}`
@@ -9,10 +19,10 @@ export default {
 	getRegisterUrl() {
 		return `${userUrl}/user/register`
 	},
-	getAsidesUrl(offset){
-		return `${httpUrl}/asides/${offset}`
+	getAsides(offset) {
+		return getDataList(`${httpUrl}/asides/${offset}`)
 	},
-	getWelfaresUrl(offset){
-		return `${httpUrl}/welfares/${offset}`
-	},
+	getWelfares(offset) {
+		return getDataList(`${httpUrl}/welfares/${offset}`)
+	}
 }

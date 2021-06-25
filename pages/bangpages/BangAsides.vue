@@ -4,20 +4,19 @@
 		<view style="background-color: #fff;">
 			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
 		</view>
-		<cl-filter-bar @change="onChange" class="filter-bar">
-			<cl-filter-item label="生活用品" />
-			<cl-filter-item label="体育用品" />
-			<cl-filter-item label="课本书籍" />
-			<cl-filter-item label="其他" />
+		<cl-filter-bar @change="handleChange()" class="filter-bar">
+			<cl-filter-item label="生活用品" prop="生活用品" value="true" />
+			<cl-filter-item label="体育用品" prop="体育用品" value="true" />
+			<cl-filter-item label="课本书籍" prop="课本书籍" value="true" />
+			<cl-filter-item label="其他" prop="其他" value="true" />
 		</cl-filter-bar>
 		<view class="card-box" v-if="visiable">
 			<view class="card" v-for="card in asides" :key="card.id">
 				<MyCard :card="card"></MyCard>
 			</view>
+			<cl-loadmore background-color="#f9f9f9" :loading="loading" :finish="finished"></cl-loadmore>
 		</view>
-		<view class="card-box" v-else>
-			<p>页面加载中。。。</p>
-		</view>
+		<my-loading v-else></my-loading>
 	</view>
 </template>
 
@@ -26,29 +25,59 @@
 		data() {
 			return {
 				asides: [],
-				visiable:false,
+				visiable: false,
+				loading: false,
+				finished: false,
+				selector: new Set(['生活用品', '体育用品', '课本书籍', '其他']),
 			}
 		},
 		methods: {
-			onChange() {}
-		},
-		components: {},
-		beforeMount() {
-			uni.request({
-				url: this.$api.getAsidesUrl(this.asides.length),
-				success: (res) => {
-					console.log(res)
-					res.data.data.list.forEach(item=>{
-						this.asides.push({
-							...item,
-							showMore: true,
-							moreText:item.catagory,
-							showFooter:true,
-							footText:item.createTime
-						})
-					})
-					this.visiable=true
+			updateShowState() {
+				this.asides.forEach(item => {
+					if (this.selector.has(item.moreText)) {
+						item.show = true
+					} else {
+						item.show = false
+					}
+				})
+			},
+			handleChange({
+				prop,
+				value
+			}) {
+				if (value) {
+					this.selector.add(prop)
+				} else {
+					this.selector.delete(prop)
 				}
+				this.updateShowState()
+			},
+			addAsides(asideList){
+				asideList.forEach(item => {
+					this.asides.push({
+						...item,
+						showMore: true,
+						moreText: item.category,
+						show: false
+					})
+				})
+				this.asides.sort(function(a, b) {
+					return new Date(b.footerText) - new Date(a.footerText)
+				})
+				this.updateShowState()
+			}
+		},
+		beforeMount() {
+			this.$api.getAsides(this.asides.length).then(asideList => {
+				this.addAsides(asideList),
+				this.visiable=true
+			})
+		},
+		onReachBottom() {
+			this.loading = true
+			this.$api.getAsides(this.asides.length).then(asides=>{
+				this.addAsides(asides)
+				this.loading = false
 			})
 		}
 	}

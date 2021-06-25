@@ -15,13 +15,13 @@
 			</view>
 			<cl-loadmore background-color="#f9f9f9" :loading="loading" :finish="finished"></cl-loadmore>
 		</view>
-		<view class="card-box" v-else>
-			<p>页面加载中。。。</p>
-		</view>
+		<my-loading v-else></my-loading>
 	</view>
 </template>
 
 <script>
+	import MyLoading from '../../components/MyLoading/MyLoading.vue'
+
 	export default {
 		data() {
 			return {
@@ -31,6 +31,9 @@
 				finished: false,
 				selector: new Set(['寻物启事', '失物招领', '校园帮帮']),
 			}
+		},
+		components: {
+			MyLoading,
 		},
 		methods: {
 			updateShowState() {
@@ -42,12 +45,12 @@
 					}
 				})
 			},
-			getWelfares(welfareList) {
+			addWelfares(welfareList) {
 				welfareList.forEach(item => {
 					this.welfares.push({
 						...item,
 						showMore: true,
-						moreText: item.catagory,
+						moreText: item.category,
 						showFooter: true,
 						footerText: item.createTime,
 						show: false
@@ -71,22 +74,16 @@
 			}
 		},
 		beforeMount() {
-			uni.request({
-				url: this.$api.getWelfaresUrl(this.welfares.length),
-				success: (res) => {
-					this.getWelfares(res.data.data.list)
-					this.visiable = true
-				}
+			this.$api.getWelfares(this.welfares.length).then(welfares => {
+				this.addWelfares(welfares)
+				this.visiable = true
 			})
 		},
 		onReachBottom() {
 			this.loading = true
-			uni.request({
-				url: this.$api.getWelfaresUrl(this.welfares.length),
-				success: (res) => {
-					this.getWelfares(res.data.data.list)
-					this.loading = false
-				}
+			this.$api.getWelfares(this.welfares.length).then(welfares => {
+				this.addWelfares(welfares)
+				this.loading = false
 			})
 		}
 	}
