@@ -76,8 +76,8 @@
 		},
 		beforeMount() {
 			this.$api.getAsides(this.asides.length).then(asideList => {
-				this.addAsides(asideList),
-					this.visiable = true
+				this.addAsides(asideList)
+				this.visiable = true
 			})
 		},
 		onReachBottom() {

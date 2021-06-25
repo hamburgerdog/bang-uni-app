@@ -24,5 +24,8 @@ export default {
 	},
 	getWelfares(offset) {
 		return getDataList(`${httpUrl}/welfares/${offset}`)
+	},
+	getDelivers(offset){
+		return getDataList(`${httpUrl}/delivers/${offset}`)
 	}
 }
