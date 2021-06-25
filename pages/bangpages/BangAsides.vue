@@ -1,16 +1,18 @@
 <template>
 	<view>
 		<RouterFab></RouterFab>
-		<view style="background-color: #fff;">
-			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+		<view class="band-header-fixed">
+			<view style="background-color: #fff;">
+				<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+			</view>
+			<cl-filter-bar @change="handleChange()" class="filter-bar">
+				<cl-filter-item label="生活用品" prop="生活用品" value="true" />
+				<cl-filter-item label="体育用品" prop="体育用品" value="true" />
+				<cl-filter-item label="课本书籍" prop="课本书籍" value="true" />
+				<cl-filter-item label="其他" prop="其他" value="true" />
+			</cl-filter-bar>
 		</view>
-		<cl-filter-bar @change="handleChange()" class="filter-bar">
-			<cl-filter-item label="生活用品" prop="生活用品" value="true" />
-			<cl-filter-item label="体育用品" prop="体育用品" value="true" />
-			<cl-filter-item label="课本书籍" prop="课本书籍" value="true" />
-			<cl-filter-item label="其他" prop="其他" value="true" />
-		</cl-filter-bar>
-		<view class="card-box" v-if="visiable">
+		<view class="card-box bang-after-header" v-if="visiable">
 			<view class="card" v-for="card in asides" :key="card.id">
 				<MyCard :card="card"></MyCard>
 			</view>
@@ -21,6 +23,8 @@
 </template>
 
 <script>
+	import MyLoading from '../../components/MyLoading/MyLoading.vue'
+
 	export default {
 		data() {
 			return {
@@ -30,6 +34,9 @@
 				finished: false,
 				selector: new Set(['生活用品', '体育用品', '课本书籍', '其他']),
 			}
+		},
+		components: {
+			MyLoading,
 		},
 		methods: {
 			updateShowState() {
@@ -52,7 +59,7 @@
 				}
 				this.updateShowState()
 			},
-			addAsides(asideList){
+			addAsides(asideList) {
 				asideList.forEach(item => {
 					this.asides.push({
 						...item,
@@ -70,12 +77,12 @@
 		beforeMount() {
 			this.$api.getAsides(this.asides.length).then(asideList => {
 				this.addAsides(asideList),
-				this.visiable=true
+					this.visiable = true
 			})
 		},
 		onReachBottom() {
 			this.loading = true
-			this.$api.getAsides(this.asides.length).then(asides=>{
+			this.$api.getAsides(this.asides.length).then(asides => {
 				this.addAsides(asides)
 				this.loading = false
 			})

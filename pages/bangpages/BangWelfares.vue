@@ -1,15 +1,17 @@
 <template>
 	<view>
 		<RouterFab></RouterFab>
-		<view style="background-color: #fff;">
-			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+		<view class="band-header-fixed">
+			<view style="background-color: #fff;">
+				<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+			</view>
+			<cl-filter-bar @change="handleChange()" class="filter-bar">
+				<cl-filter-item label="寻物启事" prop="寻物启事" value="true" />
+				<cl-filter-item label="失物招领" prop="失物招领" value="true" />
+				<cl-filter-item label="校园帮帮" prop="校园帮帮" value="true" />
+			</cl-filter-bar>
 		</view>
-		<cl-filter-bar @change="handleChange()" class="filter-bar">
-			<cl-filter-item label="寻物启事" prop="寻物启事" value="true" />
-			<cl-filter-item label="失物招领" prop="失物招领" value="true" />
-			<cl-filter-item label="校园帮帮" prop="校园帮帮" value="true" />
-		</cl-filter-bar>
-		<view class="card-box" v-if="visiable">
+		<view class="card-box bang-after-header" v-if="visiable">
 			<view class="card" v-for="card in welfares" :key="card.id">
 				<MyCard :card="card"></MyCard>
 			</view>

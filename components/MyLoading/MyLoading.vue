@@ -17,6 +17,7 @@
 
 <style lang="scss">
 	.my-loading{
+		padding: 20rpx 0;
 		color: #666;
 		text-align: center;
 	}

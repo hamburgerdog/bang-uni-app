@@ -1,17 +1,19 @@
 <template>
 	<view>
 		<RouterFab></RouterFab>
-		<view style="background-color: #fff;">
-			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+		<view class="band-header-fixed">
+			<view style="background-color: #fff;">
+				<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+			</view>
+			<cl-filter-bar @change="onChange" class="filter-bar">
+				<cl-filter-item label="时间优先" prop="timeFirst" />
+				<cl-filter-item label="酬金优先" prop="salaryFirst" />
+				<cl-filter-item label="送货地点" v-model="destCategory" :options="destCategoryList" type="dropdown" multiple
+					prop="dest" theme="grid" />
+				<cl-filter-item label="取货地点" v-model="pickUpAddress" :options="pickUpAddressList" type="dropdown"
+					multiple prop="pickup" theme="grid" />
+			</cl-filter-bar>
 		</view>
-		<cl-filter-bar @change="onChange" class="filter-bar">
-			<cl-filter-item label="时间优先" />
-			<cl-filter-item label="酬金优先" />
-			<cl-filter-item label="送货地点" v-model="destCategory" :options="destCategoryList" type="dropdown" multiple
-				prop="rank" theme="grid" />
-			<cl-filter-item label="取货地点" v-model="pickUpAddress" :options="pickUpAddressList" type="dropdown" multiple
-				prop="rank" theme="grid" />
-		</cl-filter-bar>
 	</view>
 </template>
 
@@ -66,7 +68,22 @@
 			}
 		},
 		methods: {
-			onChange() {}
+			onChange({prop}) {
+				switch(prop){
+					case 'timeFirst':
+						break
+					case 'salaryFirst':
+						break
+					case 'dest':
+						console.log(this.destCategory)
+						break
+					case 'pickup':
+						console.log(this.pickUpAddress)
+						break
+					default:
+						break
+				}
+			}
 		}
 	}
 </script>

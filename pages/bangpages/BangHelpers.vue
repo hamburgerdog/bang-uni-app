@@ -1,18 +1,20 @@
 <template>
 	<view>
 		<RouterFab></RouterFab>
-		<view style="background-color: #fff;">
-			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+		<view class="band-header-fixed">
+			<view style="background-color: #fff;">
+				<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+			</view>
+			<cl-filter-bar @change="onChange" class="filter-bar">
+				<cl-filter-item label="酬金优先" />
+				<cl-filter-item label="时间优先" />
+				<cl-filter-item label="性别限定" v-model="gender" :options="genderList" type="dropdown" prop="rank"
+					theme="grid" />
+			</cl-filter-bar>
+			<uni-notice-bar class="" scrollable="true" single="true"
+				text="禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助 , 禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助" speed="80" showIcon="true" />
 		</view>
-		<cl-filter-bar @change="onChange" class="filter-bar">
-			<cl-filter-item label="酬金优先" />
-			<cl-filter-item label="时间优先" />
-			<cl-filter-item label="性别限定" v-model="gender" :options="genderList" type="dropdown" prop="rank"
-				theme="grid" />
-		</cl-filter-bar>
-		<uni-notice-bar scrollable="true" single="true" class="notice-bar"
-			text="禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助 , 禁止发布代课|替考|刷单求助  , 禁止发布代课|替考|刷单求助" speed="80" showIcon="true" />
-		<view class="card-box" v-if="visiable">
+		<view class="card-box bang-after-header" v-if="visiable">
 			<view class="card" v-for="card in helpers" :key="card.index">
 				<MyCard :card="card"></MyCard>
 			</view>
@@ -107,8 +109,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.notice-bar {
-		position: sticky;
-		top: 0;
+	.bang-after-header{
+		margin-top: 270rpx;
 	}
 </style>

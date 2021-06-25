@@ -35,14 +35,25 @@
 	.contact-info {
 		width: 42%;
 	}
-	
+
 	.card-box {
 		padding: 0 20rpx;
 		margin-top: 20rpx;
-	
+
 		.card {
 			position: relative;
 			margin-bottom: 20rpx;
 		}
+	}
+
+	.band-header-fixed {
+		z-index: 9;
+		position: fixed;
+		width: 100%;
+		top: 0;
+	}
+
+	.bang-after-header {
+		margin-top: 200rpx;
 	}
 </style>

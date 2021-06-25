@@ -1,17 +1,19 @@
 <template>
 	<view>
 		<RouterFab></RouterFab>
-		<view style="background-color: #fff;">
-			<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+		<view class="band-header-fixed">
+			<view style="background-color: #fff;">
+				<uni-search-bar bgColor="white" :radius="100" @confirm="search" placeholder="请输入搜索关键字"></uni-search-bar>
+			</view>
+			<cl-filter-bar @change="onChange" class="filter-bar">
+				<cl-filter-item label="时间优先" />
+				<cl-filter-item label="酬金优先" />
+				<cl-filter-item label="送餐地点" v-model="destCategory" :options="destCategoryList" type="dropdown" multiple
+					prop="rank" theme="grid" />
+				<cl-filter-item label="取餐地点" v-model="pickUpAddress" :options="pickUpAddressList" type="dropdown"
+					multiple prop="rank" theme="grid" />
+			</cl-filter-bar>
 		</view>
-		<cl-filter-bar @change="onChange" class="filter-bar">
-			<cl-filter-item label="时间优先" />
-			<cl-filter-item label="酬金优先" />
-			<cl-filter-item label="送餐地点" v-model="destCategory" :options="destCategoryList" type="dropdown" multiple
-				prop="rank" theme="grid" />
-			<cl-filter-item label="取餐地点" v-model="pickUpAddress" :options="pickUpAddressList" type="dropdown" multiple
-				prop="rank" theme="grid" />
-		</cl-filter-bar>
 	</view>
 </template>
 
