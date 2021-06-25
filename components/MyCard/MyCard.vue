@@ -55,7 +55,7 @@
 			image {
 				max-width: 180rpx;
 				max-height: 150rpx;
-				margin: 15rpx;
+				margin: 10rpx 15rpx 10rpx 0rpx;
 			}
 		}
 
@@ -65,6 +65,7 @@
 			justify-content: space-between;
 			border-bottom: 4rpx solid $page-bg;
 			font-size: 34rpx;
+			font-weight: 600;
 			line-height: 2;
 			color: $element-headline;
 
@@ -76,6 +77,7 @@
 		.card-content {
 			color: #666;
 			font-size: 30rpx;
+			margin: 15rpx 0;
 		}
 
 		.card-footer {
