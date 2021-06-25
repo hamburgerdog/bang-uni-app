@@ -89,7 +89,6 @@
 			updateShowState() {
 				if (this.isTimeFirst) {
 					this.delivers.sort(function(a, b) {
-						console.log(new Date(a.deadline.replace(/-/g,'/')) - new Date(b.deadline.replace(/-/g,'/')))
 						return new Date(a.deadline.replace(/-/g,'/')) - new Date(b.deadline.replace(/-/g,'/'))
 					})
 				}
